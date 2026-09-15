@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuvei Presentation - Speaker Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0e1a;
+            color: #e2e8f0;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid rgba(0, 217, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .toc {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid #00d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .toc h3 {
+            color: #00d9ff;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .toc-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .toc-item {
+            padding: 8px;
+            color: #cbd5e1;
+            font-size: 0.9em;
+        }
+
+        .toc-item a {
+            color: #00d9ff;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .toc-item a:hover {
+            text-decoration: underline;
+            color: #00ff88;
+        }
+
+        .slide-section {
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(0, 217, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 217, 255, 0.1);
+        }
+
+        .slide-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            color: #0a0e1a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+
+        .slide-title {
+            font-size: 1.8em;
+            color: #00d9ff;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            color: #cbd5e1;
+            font-size: 0.95em;
+            line-height: 1.8;
+        }
+
+        .bullet-list {
+            list-style: none;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .bullet-list li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .bullet-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #00d9ff;
+        }
+
+        .qa-box {
+            background: rgba(255, 107, 107, 0.08);
+            border-left: 4px solid #ff6b6b;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .qa-box strong {
+            color: #ff6b6b;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .qa-answer {
+            color: #cbd5e1;
+            font-size: 0.9em;
+            margin-left: 15px;
+            margin-top: 8px;
+        }
+
+        .improvement-box {
+            background: rgba(0, 255, 136, 0.08);
+            border-left: 4px solid #00ff88;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .improvement-box strong {
+            color: #00ff88;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .improvement-content {
+            color: #cbd5e1;
+            font-size: 0.9em;
+            margin-left: 15px;
+            margin-top: 8px;
+        }
+
+        .tip-box {
+            background: rgba(0, 217, 255, 0.08);
+            border-left: 4px solid #00d9ff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+
+        .tip-box strong {
+            color: #00d9ff;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .tip-content {
+            color: #cbd5e1;
+            font-size: 0.9em;
+            margin-left: 15px;
+            margin-top: 8px;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            color: #0a0e1a;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85em;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .toc-list {
+                grid-template-columns: 1fr;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .slide-title {
+                font-size: 1.4em;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                padding: 10px 15px;
+                font-size: 0.75em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Nuvei Presentation</h1>
+            <p class="subtitle">Speaker Guide & Talking Points</p>
+            <p class="subtitle">Intelligent Account Routing & Enrichment</p>
+        </header>
+
+        <div class="toc">
+            <h3>Quick Navigation</h3>
+            <div class="toc-list">
+                <div class="toc-item"><a onclick="scrollTo('slide1')">1. Cover</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide2')">2. The Problem</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide3')">3. The Solution</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide4')">4. How It Works</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide5')">5. STEP -1</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide6')">6. STEP 0 & 1-5</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide7')">7. STEP 6</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide8')">8. STEP 7-8</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide9')">9. Deep Dive</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide10')">10. STEP 9</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide11')">11. Seller Ready</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide12')">12. Salesforce</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide13')">13. Scalability</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide14')">14. ACME Case</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide15')">15. Learning Loop</a></div>
+                <div class="toc-item"><a onclick="scrollTo('slide16')">16. The Result</a></div>
+            </div>
+        </div>
+
+        <!-- SLIDE 1 -->
+        <div class="slide-section" id="slide1">
+            <span class="slide-number">SLIDE 1/16</span>
+            <h2 class="slide-title">Intelligent Account Routing & Enrichment</h2>
+
+            <div class="section">
+                <div class="section-title">Opening Pitch (30-45 seconds)</div>
+                <div class="section-content">
+                    "Hi everyone. Today I want to walk you through a complete automation solution I've designed for a critical sales operations challenge: how to take a raw list of new accounts and transform them into ready-to-call opportunities in under 20 minutes, all while ensuring they're matched to the best-fit sales rep.
+                    <br><br>
+                    This isn't just about speed — it's about quality, scalability, and giving your sales team the intelligence they need to close faster. Over the next 15 minutes, I'll break down a 10-step workflow that combines intelligent deduplication, multi-source data enrichment, AI analysis, and data-driven seller matching.
+                    <br><br>
+                    The goal is simple: enriched accounts + optimal AE assignment + clear sales visibility + continuous learning."
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Key Points to Emphasize</div>
+                <ul class="bullet-list">
+                    <li>End-to-end workflow automation (not just a single tool)</li>
+                    <li>Speed + Quality balance (18 minutes, not hours)</li>
+                    <li>AI-driven intelligence (not rule-based)</li>
+                    <li>Scalability (designed for 100K+ accounts)</li>
+                </ul>
+            </div>
+
+            <div class="tip-box">
+                <strong>Tip:</strong>
+                <div class="tip-content">Set expectations now: "I've designed this as a practical, end-to-end solution that balances automation with intelligence. Some parts are conceptual, some are very implementable today."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2 -->
+        <div class="slide-section" id="slide2">
+            <span class="slide-number">SLIDE 2/16</span>
+            <h2 class="slide-title">The Problem</h2>
+
+            <div class="section">
+                <div class="section-title">Problem Summary (1-2 minutes)</div>
+                <div class="section-content">
+                    "Most sales organizations face two critical bottlenecks:
+                    <br><br>
+                    First: Incomplete Data. New accounts arrive with missing information. You don't know who the decision-makers are, what their business needs are, or if they're even a good fit. Your SDRs spend hours doing research that should have been automated.
+                    <br><br>
+                    Second: Random Assignment. There's no data-driven way to match accounts to AEs. You might have a world-class sales rep who's perfect for SaaS companies, but they get assigned to retail. That's leaving money on the table."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What if we already have some data enrichment tools?</strong>
+                <div class="qa-answer">A: Most tools enrich company data only. They miss the critical contact layer, the AI analysis of opportunity, and the seller matching algorithm. This solution ties those together."</div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: How big is this problem financially?</strong>
+                <div class="qa-answer">A: If your SDRs spend 2 hours per account on research (at $30-40/hour), and you process 1,000 accounts/month, that's $60-80K in wasted labor. Plus: mismatched AEs can reduce close rates by 15-25%."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add a metric: "Current state: X% of accounts lack decision-maker contacts; Y% of AEs are matched outside their strength area." This makes the problem quantifiable.</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="slide-section" id="slide3">
+            <span class="slide-number">SLIDE 3/16</span>
+            <h2 class="slide-title">The Solution: 3 Pillars</h2>
+
+            <div class="section">
+                <div class="section-title">Three Core Pillars (2 minutes)</div>
+                <div class="section-content">
+                    "The solution rests on three pillars:
+                    <br><br>
+                    1. Intelligence Enrichment — Multi-source data synthesis. Not just company facts, but context: funding, hiring signals, buying urgency, decision-maker details. Think of it as painting a complete picture of the opportunity.
+                    <br><br>
+                    2. Intelligent Seller Matching — An algorithm that ranks your AEs by fit for each account. Historical win rates, buyer persona match, deal size experience, current capacity. Not random, data-driven.
+                    <br><br>
+                    3. Continuous Learning — A feedback loop that improves over time. We record call outcomes, analyze them, and use that to refine the algorithm month-over-month."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: Isn't this just a CRM feature?</strong>
+                <div class="qa-answer">A: Not quite. Most CRMs excel at data storage and management, but they don't automate the enrichment pipeline, AI analysis, or seller ranking algorithm. We're talking about orchestration of multiple tools + custom logic."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add a "before/after" comparison: "Before: 2-4 hours to qualify and assign an account | After: 18 minutes, fully enriched, optimally matched."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4 -->
+        <div class="slide-section" id="slide4">
+            <span class="slide-number">SLIDE 4/16</span>
+            <h2 class="slide-title">How It Works: The 10-Step Workflow</h2>
+
+            <div class="section">
+                <div class="section-title">Workflow Overview (1 minute)</div>
+                <div class="section-content">
+                    "The workflow is split into 10 logical steps that happen in sequence:
+                    <br><br>
+                    Steps -1 & 0 are validation gates. We make sure this is a new account and it meets your ICP.
+                    <br>
+                    Steps 1-5 happen in parallel. All data enrichment APIs run at once, so we're not waiting 10 minutes for each source — we get results concurrently.
+                    <br>
+                    Step 6 is the AI engine. We synthesize all that data into insights and recommendations.
+                    <br>
+                    Steps 7-9 are quality checks and matching. We score the data quality, rank seller fit, and get manager approval.
+                    <br>
+                    The entire flow completes in 18 minutes, and the account lands in Salesforce ready for an AE to call."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: Why parallel enrichment instead of sequential?</strong>
+                <div class="qa-answer">A: Parallel cuts time from ~20-30 minutes to ~10 minutes for enrichment. With 1,000 accounts, that's 20,000 minutes of SDR time saved per month."</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Tip:</strong>
+                <div class="tip-content">Use a visual metaphor: "Think of this like an assembly line. Each station (step) does its job, and the account moves through. But stations 1-5 work simultaneously, not in sequence."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5 -->
+        <div class="slide-section" id="slide5">
+            <span class="slide-number">SLIDE 5/16</span>
+            <h2 class="slide-title">STEP -1: Intelligent Deduplication</h2>
+
+            <div class="section">
+                <div class="section-title">Deduplication Logic (1 minute)</div>
+                <div class="section-content">
+                    "Before we spend time enriching, we check: have we seen this account before?
+                    <br><br>
+                    We check three signals: domain match (exact domain or variations), LinkedIn company ID match (captures acquisitions), and account name fuzzy match.
+                    <br><br>
+                    If we find a duplicate, we skip enrichment and route the account to your existing record. This prevents wasted API calls and keeps your data clean."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What about companies with multiple domains or subsidiaries?</strong>
+                <div class="qa-answer">A: Good catch. We'd use a hierarchy check in your CRM. If the domain is a subsidiary of a known parent company, we route to the parent record. And LinkedIn IDs solve the acquisition problem automatically."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add an "enrichment recency" check: "If this account was enriched in the last 90 days, skip re-enrichment and save API costs." This prevents redundant enrichment.</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6 -->
+        <div class="slide-section" id="slide6">
+            <span class="slide-number">SLIDE 6/16</span>
+            <h2 class="slide-title">STEP 0: Validation Gate & STEPS 1-5: Enrichment</h2>
+
+            <div class="section">
+                <div class="section-title">Validation & Enrichment (2 minutes)</div>
+                <div class="section-content">
+                    "STEP 0 is a quality gate. We check:
+                    <br>• Domain is valid (not a free email domain)
+                    <br>• Company fits your ICP
+                    <br>• SDR team is available to work this account
+                    <br><br>
+                    If any check fails, we stop and flag it for manual review.
+                    <br><br>
+                    If checks pass, STEPS 1-5 trigger in parallel:
+                    <br>
+                    1. Clay: Deep company data (funding, headcount, industry, location)
+                    <br>
+                    2. Claygent: AI agent to find recent hires, job postings, leadership changes
+                    <br>
+                    3. Signals: Funding rounds, bankruptcies, news, expansion signals
+                    <br>
+                    4. Context Database: Benchmark against similar closed deals
+                    <br>
+                    5. Phone Validation: Partial coverage for contact enrichment"
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What if an API call fails?</strong>
+                <div class="qa-answer">A: We retry with exponential backoff, and if it fails after 3 attempts, we mark that field as 'unavailable' and continue. The account still moves forward — we just note the gap."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add fallback enrichment: "If Clay data is incomplete, check secondary sources (ZoomInfo, Hunter, etc.) to fill gaps before moving to Step 6."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7 -->
+        <div class="slide-section" id="slide7">
+            <span class="slide-number">SLIDE 7/16</span>
+            <h2 class="slide-title">STEP 6: Agent AI Analysis</h2>
+
+            <div class="section">
+                <div class="section-title">AI-Powered Insights (1.5 minutes)</div>
+                <div class="section-content">
+                    "Now we have raw data from 5 sources. STEP 6 is where AI synthesizes it into actionable intelligence.
+                    <br><br>
+                    Claude or GPT-4 takes the enriched data and generates:
+                    <br>• Deal stage assessment (discovery, evaluation, negotiation)
+                    <br>• Urgency scoring (immediate need, planned, exploratory)
+                    <br>• Buying committee composition
+                    <br>• Budget authority (CEO, CFO, VP Ops)
+                    <br>• Winning angle (what problem can we solve uniquely)
+                    <br>• Risk flags (competitive threat, budget constraints, stalled projects)
+                    <br><br>
+                    This is context that raw data can't tell you. It's the 'why' behind the 'what'."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: How reliable is AI-generated analysis?</strong>
+                <div class="qa-answer">A: Very reliable for synthesis and pattern recognition, less so for predictions. That's why we pair it with Step 7 (quality scoring) and Step 9 (manager review). AI is a tool, not the final decision-maker."</div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What about data hallucination?</strong>
+                <div class="qa-answer">A: We use temperature=0 prompts (deterministic, not creative) and require all claims to be sourced from the enriched data. If the AI cites something not in our data, we flag it.</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add confidence scoring: "AI rates its own confidence in each insight (high/medium/low). Manager review focuses on low-confidence items."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8 -->
+        <div class="slide-section" id="slide8">
+            <span class="slide-number">SLIDE 8/16</span>
+            <h2 class="slide-title">STEP 7: Quality Scoring & STEP 8: Seller Matching Intro</h2>
+
+            <div class="section">
+                <div class="section-title">Quality & Matching Setup (1.5 minutes)</div>
+                <div class="section-content">
+                    "STEP 7 scores data quality:
+                    <br>• Company data completeness (100% if all fields filled)
+                    <br>• Email coverage (% of decision-makers with email)
+                    <br>• Phone coverage (% with direct phone)
+                    <br>• Signal quality (is the data recent and relevant)
+                    <br>• Context match (similar to accounts you've won)
+                    <br><br>
+                    If quality score is below threshold (e.g., 70%), the account is held for manual research instead of auto-routing.
+                    <br><br>
+                    STEP 8 introduces seller matching. We don't assign yet — we rank your AEs by fit. The algorithm considers:
+                    <br>• Historical win rate on similar company profiles
+                    <br>• Deal size experience
+                    <br>• Vertical/industry expertise
+                    <br>• Buyer persona match (do they close with CFOs? CTOs?)
+                    <br>• Current pipeline capacity"
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: How do we measure 'win rate' for an AE on a buyer persona?</strong>
+                <div class="qa-answer">A: We analyze historical Salesforce data: for each AE, we look at closed-won deals and bucket them by buyer title (CFO, VP Sales, CIO, etc.). That gives us AE strengths."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add territory weighting: "If an AE owns the Northeast region and this account is in the Northeast, boost their score. Territory fit matters."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9 -->
+        <div class="slide-section" id="slide9">
+            <span class="slide-number">SLIDE 9/16</span>
+            <h2 class="slide-title">Deep Dive: Intelligent Seller Matching Algorithm</h2>
+
+            <div class="section">
+                <div class="section-title">Algorithm Deep Dive (2-3 minutes)</div>
+                <div class="section-content">
+                    "The seller matching algorithm is the crown jewel. Here's how it works:
+                    <br><br>
+                    1. Feature Engineering: We extract features for the account (size, industry, buyer type, deal stage) and each AE (win rates, capacities, strengths).
+                    <br><br>
+                    2. Scoring: Each AE gets a score out of 100 based on:
+                    <br>   — Historical performance on similar accounts (weight: 40%)
+                    <br>   — Capacity and bandwidth (weight: 30%)
+                    <br>   — Buyer persona expertise (weight: 20%)
+                    <br>   — Territory alignment (weight: 10%)
+                    <br><br>
+                    3. Ranking: We rank AEs 1-3 and surface the top 3 to the manager for approval.
+                    <br><br>
+                    4. Learning: After the call, we record outcome (won/lost/stalled) and feed it back. Next month, that AE's scores shift based on real-world results."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What if two AEs have the same score?</strong>
+                <div class="qa-answer">A: We use tiebreakers: current pipeline size (prefer lower), days since last deal closed (prefer recently active), then random. This avoids stacking one AE's pipeline."</div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: How do we prevent bias?</strong>
+                <div class="qa-answer">A: The algorithm is data-driven, not intuitive. We audit annually for bias (e.g., are we systematically favoring certain AEs?) and adjust weights if needed."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add career development: "Flag opportunities for junior AEs on smaller deals, so they build experience in their weak areas. This isn't just about win rates — it's about team growth."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10 -->
+        <div class="slide-section" id="slide10">
+            <span class="slide-number">SLIDE 10/16</span>
+            <h2 class="slide-title">STEP 9: Manager Decision & Approval</h2>
+
+            <div class="section">
+                <div class="section-title">Manager Review (1 minute)</div>
+                <div class="section-content">
+                    "Before an account is assigned, a sales manager reviews it.
+                    <br><br>
+                    They see:
+                    <br>• The Enrichment Card (company data + decision-makers + signals)
+                    <br>• AI analysis + risk flags
+                    <br>• Top 3 AE recommendations with scores
+                    <br><br>
+                    The manager can:
+                    <br>• Approve the top recommendation (1 click)
+                    <br>• Choose a different AE if they have context we don't
+                    <br>• Hold the account for more research
+                    <br>• Flag it as disqualified
+                    <br><br>
+                    This is a quality control gate. Humans make the final decision, but they're armed with data."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: Will managers feel like the algorithm is removing their decision-making power?</strong>
+                <div class="qa-answer">A: Frame it as 'augmentation, not replacement.' The algorithm removes grunt work (researching 50 accounts manually) and surfaces the best options. Managers still decide."</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Tip:</strong>
+                <div class="tip-content">Emphasize: "Managers love this because they're no longer guessing. They see the data, see the recommendation, and make a confident decision in 2 minutes instead of 20."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add approval workflow: "If manager approval takes >24 hours, auto-escalate to director. This keeps accounts moving."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11 -->
+        <div class="slide-section" id="slide11">
+            <span class="slide-number">SLIDE 11/16</span>
+            <h2 class="slide-title">Seller Ready to Work</h2>
+
+            <div class="section">
+                <div class="section-title">Moment of Truth (1 minute)</div>
+                <div class="section-content">
+                    "18 minutes after the account entered the system, it lands on your AE's desk — or more precisely, in their Salesforce and as a mobile push notification.
+                    <br><br>
+                    They see:
+                    <br>• The Enrichment Card (single source of truth)
+                    <br>• Company context + recent signals
+                    <br>• Decision-maker names + contact info
+                    <br>• AI-generated winning angle + risk flags
+                    <br>• Historical context (similar wins this team has closed)
+                    <br><br>
+                    The AE doesn't research — they execute. They call the decision-maker, reference the insight, and have a 90-day sales cycle mapped out."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: Will AEs feel micromanaged by this level of orchestration?</strong>
+                <div class="qa-answer">A: No, because you're solving their problem. They complained about spending 2 hours researching — now they get a polished account in 18 minutes. They love that."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add mobile-first experience: "AE gets a SMS with key facts + Salesforce link. They can action the account from their phone before sitting at their desk."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12 -->
+        <div class="slide-section" id="slide12">
+            <span class="slide-number">SLIDE 12/16</span>
+            <h2 class="slide-title">Salesforce Visibility & Integration</h2>
+
+            <div class="section">
+                <div class="section-title">Salesforce Custom Fields (1.5 minutes)</div>
+                <div class="section-content">
+                    "All enrichment is synced to Salesforce as custom fields:
+                    <br><br>
+                    • Enrichment Status (new, in-progress, ready-to-call)
+                    <br>• Quality Score (0-100)
+                    <br>• Decision-Maker Name, Email, Phone (auto-populated)
+                    <br>• Buying Urgency Level (discovery/evaluation/decision)
+                    <br>• Estimated Deal Size (based on company size + ICP match)
+                    <br>• Estimated Sales Cycle (90 days, 120 days, etc.)
+                    <br>• Winning Angle (AI recommendation)
+                    <br>• Risk Flags (competitive threat, budget concerns, etc.)
+                    <br>• Assigned AE + assignment reason
+                    <br><br>
+                    Managers & Sales Ops get visibility via:
+                    <br>• Dashboard widget on account record
+                    <br>• List view 'Ready for SDR Action' (filtered view)
+                    <br>• Email summary + mobile push on assignment
+                    <br>• Weekly report on enrichment velocity"
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: Will custom fields clutter the Salesforce UI?</strong>
+                <div class="qa-answer">A: Not if you use field sets and page layouts wisely. Group enrichment fields in a dedicated 'Account Intelligence' section. AEs only see what's relevant."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add Slack integration: "When an account is ready, post to #sales_new_accounts with key facts. AE can comment, questions bubble up to manager."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13 -->
+        <div class="slide-section" id="slide13">
+            <span class="slide-number">SLIDE 13/16</span>
+            <h2 class="slide-title">Scalability: Growing from 1,000 to 100,000+ Accounts</h2>
+
+            <div class="section">
+                <div class="section-title">Scalability Architecture (2 minutes)</div>
+                <div class="section-content">
+                    "The secret to scaling is serverless architecture (AWS Lambda):
+                    <br><br>
+                    At 1,000 accounts/month: Process in batches of 50. Each batch spawns Lambda functions in parallel. All 50 enrich simultaneously. Total time: ~20 minutes for the whole 1,000. Cost: ~$500-1,000/month in compute + API calls.
+                    <br><br>
+                    At 10,000 accounts/month: Same code. Batches of 100. Lambda auto-scales. Cost doubles but so does efficiency.
+                    <br><br>
+                    At 100,000 accounts/month: Batches of 200. Same infrastructure. Cost scales linearly with volume, but per-account cost actually decreases due to economies of scale.
+                    <br><br>
+                    The beauty: You don't re-architect. Same code, more Lambda workers. As your business grows 10x, 100x, the system scales transparently."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What about API rate limits from Clay, Signals, etc.?</strong>
+                <div class="qa-answer">A: We negotiate tiered plans. At 1,000 accounts, you're on a standard plan. At 100,000, you're on an enterprise plan with higher limits. Most vendors scale with you."</div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What's the actual cost breakdown at scale?</strong>
+                <div class="qa-answer">A: Rough math for 100K accounts/month: Lambda (~$2K), APIs (~$10-15K), storage (~$500), monitoring (~$500). Total ~$13-18K/month. Per-account cost: $0.13-0.18. Compare to one SDR's salary ($70K/year)."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add caching strategy: "Cache enrichment data for 90 days. If the same domain is enriched twice within 90 days, pull from cache. Cuts API costs by 30-40%."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14 -->
+        <div class="slide-section" id="slide14">
+            <span class="slide-number">SLIDE 14/16</span>
+            <h2 class="slide-title">Real-World Example: ACME Corp</h2>
+
+            <div class="section">
+                <div class="section-title">Walk Through the 18-Minute Journey (3-4 minutes)</div>
+                <div class="section-content">
+                    "Let me walk you through a real example: ACME Corp, a Series B SaaS company.
+                    <br><br>
+                    14:30 UTC — New account detected in system.
+                    <br>
+                    14:30-14:31 (STEP -1): DEDUP check. Not in our database. New, so continue.
+                    <br>
+                    14:31-14:32 (STEP 0): VALIDATION. Domain is valid. ICP match: yes (Series B, 150 people, profitable). SDR team available: yes. PASS.
+                    <br>
+                    14:32-14:42 (STEPS 1-5, parallel): Enrichment runs.
+                    <br>   - Clay: 150 employees, $25M ARR, Series B funding, HQ San Francisco
+                    <br>   - Claygent: VP Sales hired 30 days ago (scaling signal!), 6 open job postings
+                    <br>   - Signals: Series B $35M raised, EU expansion in progress
+                    <br>   - Context: Benchmark shows similar accounts close at $150K-240K
+                    <br>   - Phone: 3 phone numbers found for leadership
+                    <br>
+                    14:42-14:44 (STEP 6): AI analysis. Output: 'Series B SaaS + new VP Sales hire = scaling mode. High urgency, 90-day cycle. CFO controls budget. Winning angle: help them scale without hiring. Risk: May consolidate with competitor.'
+                    <br>
+                    14:44-14:44 (STEP 7): Quality score: 100%. All data complete.
+                    <br>
+                    14:44-14:45 (STEP 8): Seller matching. Top AE recommendation: Jordan (has closed 3 Series B SaaS companies, 2 with scaling narratives).
+                    <br>
+                    14:45 (STEP 9): Manager reviews in 1 minute. Approves Jordan.
+                    <br>
+                    15:00: Jordan gets notification. Account in Salesforce. Ready to call.
+                    <br><br>
+                    Total: 18 minutes from raw lead to ready-to-call. Zero manual research."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: What if the AI analysis is wrong?</strong>
+                <div class="qa-answer">A: In this case, if AI said 'consolidation risk' but actually ACME is stable, the manager would catch it. Plus, Jordan (the AE) would know — they'd do a 5-minute discovery call and validate. The system gives a head start, not a guarantee."</div>
+            </div>
+
+            <div class="tip-box">
+                <strong>Tip:</strong>
+                <div class="tip-content">Walk through ACME slowly. This is where the abstract workflow becomes concrete. Let the audience picture it happening in their own org.</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 15 -->
+        <div class="slide-section" id="slide15">
+            <span class="slide-number">SLIDE 15/16</span>
+            <h2 class="slide-title">Continuous Learning & Summary</h2>
+
+            <div class="section">
+                <div class="section-title">The Feedback Loop (2 minutes)</div>
+                <div class="section-content">
+                    "The workflow doesn't end at assignment. Month-over-month, we learn.
+                    <br><br>
+                    Gong or similar records every call. AI analyzes sentiment, objections, deal progression (won/lost/stalled). That data feeds back into the system.
+                    <br><br>
+                    Example: If accounts enriched with 'consolidation risk' flag all get stalled, we adjust the model. If Jordan's win rate on Series B companies suddenly drops, we investigate why and retrain. If the AI winning angle is consistently wrong, we refine the prompt.
+                    <br><br>
+                    This creates a virtuous cycle. Month 1: good results. Month 2: better results (because we learned). Month 3: optimized. Year 2: this is your unfair advantage."
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">The Three Pillars (Summary)</div>
+                <div class="section-content">
+                    "In 18 minutes, ACME Corp went from a raw lead to a fully enriched, optimally assigned, ready-to-call opportunity.
+                    <br><br>
+                    That's powered by:
+                    <br>1. Enrichment Pillar — Data + context from 5 sources, synthesized by AI
+                    <br>2. Seller Matching Pillar — Algorithm that ranks AEs by win probability
+                    <br>3. Learning Pillar — Feedback loop that improves every month
+                    <br><br>
+                    Result: Faster sales cycles, higher close rates, better AE happiness, lower SDR burden, scalable to 100K+ accounts."
+                </div>
+            </div>
+
+            <div class="qa-box">
+                <strong>Q: This sounds complex. How long to implement?</strong>
+                <div class="qa-answer">A: Phased approach. Phase 1 (dedup + Clay enrichment): 4-6 weeks. Phase 2 (AI analysis): 6-8 weeks. Phase 3 (seller matching algorithm): 8-12 weeks. Full rollout: 4-5 months. Start seeing ROI in weeks."</div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvement:</strong>
+                <div class="improvement-content">Add a roadmap: "Phase 1 (MVP): Enrich, assign, Salesforce sync. Phase 2 (Learning): Feedback loop, monthly model updates. Phase 3 (Optimization): Territory planning, capacity forecasting, career development signals."</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 16 -->
+        <div class="slide-section" id="slide16">
+            <span class="slide-number">SLIDE 16/16</span>
+            <h2 class="slide-title">The Result</h2>
+
+            <div class="section">
+                <div class="section-title">Closing Message (1-2 minutes)</div>
+                <div class="section-content">
+                    "Let me close with the outcomes:
+                    <br><br>
+                    For Sales Reps: Accounts land on your desk ready to call, with all the context you need. No research. No guessing. Just high-intent meetings.
+                    <br><br>
+                    For Managers: Visibility into enrichment status, quality metrics, AE performance trends. You can optimize your team's matching in real-time.
+                    <br><br>
+                    For Sales Ops: Automation that scales. 1,000 accounts or 100,000 — same system, linear cost growth.
+                    <br><br>
+                    The bottom line: Accounts enriched with complete context. Assigned to the optimal sales rep. Ready to call in 18 minutes. Continuously improving through feedback loops.
+                    <br><br>
+                    This design is practical, data-driven, and scales. It's not theoretical — every component is implementable today."
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Open the Floor</div>
+                <div class="section-content">
+                    "I'm happy to dive into any part of this in more detail — whether it's the algorithm, the implementation roadmap, cost modeling, or how this would integrate with your existing stack. What questions do you have?"
+                </div>
+            </div>
+
+            <div class="improvement-box">
+                <strong>Potential Improvements for Future Iterations:</strong>
+                <div class="improvement-content">
+                    1. Add territory planning layer — automatically balance pipeline by territory
+                    <br>
+                    2. Add competitive intelligence — flag if account is talking to competitors
+                    <br>
+                    3. Add buyer intent signals — integrate intent data (website visits, content consumption)
+                    <br>
+                    4. Add predictive scoring — ML model predicts close probability based on all signals
+                    <br>
+                    5. Add white-glove accounts — manual research path for your biggest targets
+                </div>
+            </improvement-box>
+
+            <div class="tip-box">
+                <strong>Tip:</strong>
+                <div class="tip-content">End strong. This design shows analytical thinking (the workflow), practical thinking (phased implementation), and ambitious thinking (100K scale). You've answered the core question: How would I build this?"</div>
+            </div>
+        </div>
+
+        <div class="back-to-top" onclick="scrollTo('top')">Back to Top</div>
+    </div>
+
+    <script>
+        function scrollTo(id) {
+            if (id === 'top') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        }
+    </script>
+</body>
+</html>
