@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuvei - Intelligent Account Routing & Enrichment</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0e1a;
+            color: #e2e8f0;
+            overflow: hidden;
+        }
+
+        .deck {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            position: relative;
+        }
+
+        .slides {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 60px 80px 60px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 217, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, -30px); }
+        }
+
+        .slide > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide-hero {
+            text-align: center;
+            justify-content: center;
+        }
+
+        .slide-hero h1 {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .slide-hero .subtitle {
+            font-size: 1.3em;
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .slide-hero .subsubtitle {
+            font-size: 1em;
+            color: #64748b;
+            font-weight: 300;
+        }
+
+        .slide-content {
+            align-items: flex-start;
+            padding-top: 40px;
+            width: 100%;
+        }
+
+        .logo-badge {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            z-index: 20;
+            text-transform: lowercase;
+            display: none;
+        }
+
+        .logo-badge span {
+            color: #0052cc;
+        }
+
+        .logo-badge .i {
+            color: #0052cc;
+            font-weight: 900;
+        }
+
+        .slide-title {
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+            width: 100%;
+        }
+
+        .slide-subtitle {
+            font-size: 1.1em;
+            color: #cbd5e1;
+            margin-bottom: 30px;
+            font-weight: 300;
+            width: 100%;
+        }
+
+        .content-wrapper {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 30px;
+            align-items: start;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 30px;
+            align-items: stretch;
+        }
+
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid #334155;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            border-color: #00d9ff;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 217, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #00d9ff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .number-circle {
+            min-width: 45px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #0a0e1a;
+            font-size: 1.1em;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            flex-shrink: 0;
+        }
+
+        .section-content {
+            font-size: 0.95em;
+            color: #cbd5e1;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        .bullet-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .bullet-item {
+            display: flex;
+            gap: 12px;
+            font-size: 0.9em;
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        .bullet-icon {
+            color: #00d9ff;
+            font-weight: bold;
+            min-width: 20px;
+        }
+
+        .highlight-box {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid #00d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .step-detail {
+            background: rgba(0, 217, 255, 0.05);
+            border-left: 4px solid #00d9ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 12px 0;
+            font-size: 0.9em;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .step-detail-title {
+            font-weight: 700;
+            color: #00d9ff;
+            margin-bottom: 8px;
+            font-size: 0.95em;
+        }
+
+        .placeholder {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 217, 255, 0.05);
+            border: 2px dashed #00d9ff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #00d9ff;
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 217, 255, 0.05);
+            border: 2px solid #00d9ff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #00ff88;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 0.85em;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #334155;
+            background: rgba(10, 14, 26, 0.9);
+            color: #e2e8f0;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            backdrop-filter: blur(10px);
+            font-weight: 700;
+        }
+
+        .nav-btn:hover {
+            border-color: #00d9ff;
+            color: #00d9ff;
+            transform: scale(1.15);
+            box-shadow: 0 0 25px rgba(0, 217, 255, 0.4);
+        }
+
+        .nav-dots {
+            display: flex;
+            gap: 12px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #334155;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: #00d9ff;
+            transform: scale(1.4);
+            box-shadow: 0 0 15px rgba(0, 217, 255, 0.6);
+        }
+
+        .dot:hover {
+            border-color: #00d9ff;
+        }
+
+        .slide-counter {
+            position: absolute;
+            top: 30px;
+            left: 40px;
+            font-size: 0.95em;
+            color: #94a3b8;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(10, 14, 26, 0.98) 0%, rgba(26, 31, 46, 0.98) 100%);
+            border-right: 2px solid rgba(0, 217, 255, 0.3);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 30px 15px;
+            z-index: 1000;
+            scrollbar-width: thin;
+            scrollbar-color: #00d9ff #1a1f2e;
+            transition: left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sidebar.open,
+        .sidebar:hover {
+            left: 0;
+        }
+
+        .sidebar-toggle {
+            position: fixed;
+            left: 15px;
+            top: 30px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #00d9ff, #00ff88);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: #0a0e1a;
+            font-weight: 700;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.6);
+        }
+
+        .sidebar.open ~ .sidebar-toggle {
+            left: 235px;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: #1a1f2e;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #00d9ff;
+            border-radius: 3px;
+        }
+
+        .sidebar-title {
+            font-size: 0.8em;
+            font-weight: 700;
+            color: #00d9ff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .sidebar-item {
+            padding: 12px 10px;
+            margin-bottom: 8px;
+            font-size: 0.75em;
+            color: #cbd5e1;
+            cursor: pointer;
+            border-radius: 6px;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            line-height: 1.4;
+            word-break: break-word;
+        }
+
+        .sidebar-item:hover {
+            background: rgba(0, 217, 255, 0.1);
+            border-left-color: #00d9ff;
+            color: #00d9ff;
+            padding-left: 15px;
+        }
+
+        .sidebar-item.active {
+            background: rgba(0, 217, 255, 0.15);
+            border-left-color: #00d9ff;
+            color: #00d9ff;
+            font-weight: 600;
+        }
+
+        .slides {
+            transition: margin-left 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .sidebar.open ~ .slides {
+            margin-left: 250px;
+        }
+
+        .slide {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="deck">
+        <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-title">Contents</div>
+            <div class="sidebar-item active" onclick="goToSlide(0)">1. Intelligent Account Routing & Enrichment</div>
+            <div class="sidebar-item" onclick="goToSlide(1)">2. The Problem</div>
+            <div class="sidebar-item" onclick="goToSlide(2)">3. The Solution: 3 Pillars</div>
+            <div class="sidebar-item" onclick="goToSlide(3)">4. How It Works: The 10-Step Workflow</div>
+            <div class="sidebar-item" onclick="goToSlide(4)">5. STEP -1: Intelligent Deduplication</div>
+            <div class="sidebar-item" onclick="goToSlide(5)">6. STEP 0: Validation Gate & STEPS 1-5: Enrichment</div>
+            <div class="sidebar-item" onclick="goToSlide(6)">7. STEP 6: Agent AI Analysis</div>
+            <div class="sidebar-item" onclick="goToSlide(7)">8. STEP 7: Quality Scoring & STEP 8: Seller Matching</div>
+            <div class="sidebar-item" onclick="goToSlide(8)">9. Deep Dive: Intelligent Seller Matching Algorithm</div>
+            <div class="sidebar-item" onclick="goToSlide(9)">10. STEP 9: Manager Decision & Approval</div>
+            <div class="sidebar-item" onclick="goToSlide(10)">11. Seller Ready to Work</div>
+            <div class="sidebar-item" onclick="goToSlide(11)">12. Salesforce Visibility & Integration</div>
+            <div class="sidebar-item" onclick="goToSlide(12)">13. Scalability: Growing from 1,000 to 100,000+ Accounts</div>
+            <div class="sidebar-item" onclick="goToSlide(13)">14. Real-World Example: ACME Corp</div>
+            <div class="sidebar-item" onclick="goToSlide(14)">15. Continuous Learning & Summary</div>
+            <div class="sidebar-item" onclick="goToSlide(15)">16. The Result</div>
+        </div>
+
+        <div class="slide-counter"><span id="current">1</span> / <span id="total">16</span></div>
+
+        <div class="slides" id="slides">
+            <!-- SLIDE 1: HERO -->
+            <div class="slide slide-hero">
+                <h1>Intelligent Account<br>Routing & Enrichment</h1>
+                <p class="subtitle">Automated Workflow to Optimize Sales Operations</p>
+                <p class="subsubtitle">Sales AI & Tech Specialist Exercise</p>
+            </div>
+
+            <!-- SLIDE 2: THE PROBLEM -->
+            <div class="slide slide-content">
+                <div class="logo-badge"><span>nuvei</span><span class="i">i</span></div>
+                <div class="content-wrapper">
+                    <h2 class="slide-title">The Problem</h2>
+                    <div class="two-col">
+                        <div>
+                            <div class="section-title">
+                                <span class="number-circle">1</span>
+                                Incomplete Data
+                            </div>
+                            <div class="section-content">New accounts arrive without sufficient information to act on.</div>
+                            <div class="bullet-list">
+                                <div class="bullet-item"><span class="bullet-icon">•</span><span><strong>Incomplete decision-maker contact information</strong></span></div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><span><strong>Limited context</strong> about company pain points and business needs</span></div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><span><strong>Raw data without actionable intelligence</strong> synthesis</span></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="section-title">
+                                <span class="number-circle">2</span>
+                                Inefficient Assignment
+                            </div>
+                            <div class="section-content">No data-driven way to identify the optimal AE for each account.</div>
+                            <div class="bullet-list">
+                                <div class="bullet-item"><span class="bullet-icon">•</span><span><strong>Random assignments</strong> without strategic criteria</span></div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><span><strong>Suboptimal matching</strong> between accounts and AE strengths</span></div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><span><strong>Unnecessary reprocessing</strong> of duplicate accounts</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="highlight-box" style="margin-top: 30px;">
+                        <strong>Impact:</strong> Without enriched data + intelligent assignment + deduplication → missed opportunities, lower close rates, wasted resources.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 3: THE SOLUTION -->
+            <div class="slide slide-content">
+                <div class="logo-badge"><span>nuvei</span><span class="i">i</span></div>
+                <div class="content-wrapper">
+                    <h2 class="slide-title">The Solution: 3 Pillars</h2>
+                    <div class="three-col">
+                        <div class="card">
+                            <div style="font-size: 1.2em; font-weight: 700; color: #00d9ff; margin-bottom: 12px;">1. Intelligent Deduplication</div>
+                            <div style="font-size: 0.95em; line-height: 1.6; color: #cbd5e1;">Step -1 prevents re-processing duplicate accounts. Identifies existing records, refreshes stale data, and maintains data integrity across the system.</div>
+                        </div>
+                        <div class="card">
+                            <div style="font-size: 1.2em; font-weight: 700; color: #00ff88; margin-bottom: 12px;">2. Multi-Layer Enrichment + AI</div>
+                            <div style="font-size: 0.95em; line-height: 1.6; color: #cbd5e1;">Five parallel data sources + Claude AI synthesis = complete Enrichment Card. Converts raw data into actionable business intelligence.</div>
+                        </div>
+                        <div class="card">
+                            <div style="font-size: 1.2em; font-weight: 700; color: #4caf50; margin-bottom: 12px;">3. Data-Driven Matching</div>
+                            <div style="font-size: 0.95em; line-height: 1.6; color: #cbd5e1;">Gong-based AE profiles + weighted scoring algorithm = optimal seller assignment. Includes continuous learning feedback loop.</div>
+                        </div>
+                    </div>
+                    <div class="highlight-box" style="margin-top: 40px; text-align: center;">
+                        <strong style="color: #00d9ff;">Result: Complete data enrichment + Intelligent analysis + Optimal assignment = Improved close rates, better SDR productivity, data-driven account routing</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 4-15: Summary slides (full content can be added) -->
+            <div class="slide slide-content"><div class="logo-badge"><span>nuvei</span><span class="i">i</span></div><div class="content-wrapper"><h2 class="slide-title">Workflow Overview: Complete Process</h2><img src="nuvei_visual_content/workflow_diagram.jfif" alt="Workflow Diagram" style="max-width: 80%; height: auto; margin: 20px auto; border-radius: 8px; display: block;"><div style="font-size: 0.95em; color: #94a3b8; text-align: center; margin-top: 20px;">Step -1 through Step 9 + Feedback Loop + Salesforce Visibility + Scalability</div></div></div>
+
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">STEP -1: Intelligent Deduplication</h2>
+                    <p class="slide-subtitle">Identify Duplicate Accounts Before Processing</p>
+
+                    <div class="two-col" style="margin-top: 30px;">
+                        <div>
+                            <div class="section-title"><span class="number-circle">✓</span>Deduplication Checks</div>
+                            <div class="bullet-list">
+                                <div class="bullet-item"><span class="bullet-icon">•</span><strong>Domain exact match</strong> (company domain)</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><strong>LinkedIn Company ID</strong> (most reliable identifier)</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><strong>Parent company match</strong> (identify subsidiaries)</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span><strong>Crunchbase ID</strong> (alternative verification)</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="section-title"><span class="number-circle">⚙️</span>Actions by Result</div>
+                            <div class="card" style="margin-top: 15px;">
+                                <div class="step-detail-title">If: Recently enriched (<30 days)</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 8px;"><span style="color: #ef4444; font-weight: 700;">SKIP</span> enrichment. Cost: $0</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">If: Data is stale (30-90 days)</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 8px;"><span style="color: #eab308; font-weight: 700;">REFRESH</span> signals only. Cost: $0.30</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">If: Completely new account</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 8px;"><span style="color: #22c55e; font-weight: 700;">CONTINUE</span> to full enrichment workflow</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box" style="margin-top: 30px;">
+                        <strong>Purpose:</strong> Prevents unnecessary reprocessing, maintains data integrity, and optimizes resource spending.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 6: STEP 0 VALIDATION + STEPS 1-5 ENRICHMENT -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">STEP 0: Validation Gate & STEPS 1-5: Enrichment</h2>
+
+                    <div class="two-col" style="margin-top: 30px; gap: 50px; align-items: start;">
+                        <div>
+                            <div class="card" style="background: rgba(255, 193, 7, 0.1); border-color: #fbbf24;">
+                                <div class="step-detail-title" style="color: #fbbf24;">STEP -1: Deduplication</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; line-height: 1.6; margin-top: 12px;">
+                                    <strong>Checks if account ALREADY EXISTS in our system</strong><br>
+                                    Question: "Is this a record we've seen before?"<br>
+                                    Data source: Database lookup (domain, LinkedIn ID, parent company, Crunchbase ID)<br>
+                                    Purpose: Avoid re-processing duplicates and save costs<br>
+                                    Result: If match found → SKIP or REFRESH | If no match → Continue to Step 0
+                                </div>
+                            </div>
+
+                            <div class="card" style="margin-top: 15px; background: rgba(255, 193, 7, 0.1); border-color: #fbbf24;">
+                                <div class="step-detail-title" style="color: #fbbf24;">STEP 0: Pre-Validation Gate</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; line-height: 1.6; margin-top: 12px;">
+                                    <strong>Checks if NEW account meets minimum criteria for enrichment</strong><br>
+                                    Checks (automated):<br>
+                                    ✓ Valid domain populated? | ✓ ICP match? | ✓ Not enriched in last 90 days? | ✓ SDR assigned?<br><br>
+                                    <strong>Result:</strong> If ALL checks pass → CONTINUE to enrichment<br>
+                                    <strong>Result:</strong> If ANY fails → EXIT (log reason, cost $0)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="highlight-box">
+                                <div style="font-weight: 700; color: #00d9ff; margin-bottom: 10px;">⚡ STEPS 1-5: Five Parallel Enrichment Layers</div>
+                        <div style="font-size: 0.85em; line-height: 1.7; color: #cbd5e1;">
+                            These layers execute SIMULTANEOUSLY, not sequentially<br><br>
+                            <strong>Layer 1 - Clay APIs:</strong> ZoomInfo → Apollo → Hunter | Output: Company data, emails, phone numbers | Cost: $0.20 | Time: 5 min<br>
+                            <strong>Layer 2 - Claygent AI:</strong> Web scraping (/about, /careers, LinkedIn, Glassdoor) | Output: Culture signals, hiring activity, funding news | Cost: $0.50 | Time: 10 min<br>
+                            <strong>Layer 3 - Market Signals:</strong> Crunchbase, LinkedIn Jobs, BuiltWith, News | Output: Funding rounds, tech stack, hiring trends | Cost: $0.30<br>
+                            <strong>Layer 4 - Internal Context:</strong> Salesforce query (similar customers) | Output: Deal benchmarks, win/loss patterns, ICP alignment | Cost: FREE<br>
+                            <strong>Layer 5 - Phone Enrichment:</strong> Hunter → Apollo → RocketReach | Output: Mobile/office phones, decision-maker direct lines | Cost: $0.30 | Time: 3 min
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">STEP 6: Agent AI Analysis</h2>
+                    <p class="slide-subtitle">From Raw Data to Actionable Intelligence</p>
+
+                    <div class="two-col" style="margin-top: 30px; gap: 40px; align-items: start;">
+                        <div>
+                            <div class="highlight-box">
+                                <div style="font-weight: 700; color: #ff9800; margin-bottom: 12px;">Claude API Synthesizes All Data Into Intelligence</div>
+                                <div style="font-size: 0.8em; line-height: 1.7; color: #cbd5e1;">
+                                    <strong>1. Company Interpretation:</strong> Analyzes company stage, funding, size, and industry to identify business context and growth phase<br><br>
+                                    <strong>2. Pain Point Identification:</strong> Extracts specific business challenges from signals and company data (hiring patterns, expansion, technology gaps)<br><br>
+                                    <strong>3. Buying Urgency Assessment:</strong> Evaluates urgency signals to estimate timeline and decision-making speed<br><br>
+                                    <strong>4. Deal Size Projection:</strong> Estimates deal value based on company metrics, industry benchmarks, and comparable customer data<br><br>
+                                    <strong>5. Decision-Maker Ranking:</strong> Prioritizes key stakeholders by influence, budget authority, and decision-making role<br><br>
+                                    <strong>6. Winning Angle Recommendation:</strong> Identifies the most compelling value proposition based on company context and pain points<br><br>
+                                    <strong>7. Risk Assessment:</strong> Flags potential obstacles or competitive threats that could impact the deal
+                                </div>
+                            </div>
+
+                            <div class="card" style="margin-top: 12px; background: rgba(76, 175, 80, 0.1); border-color: #4caf50;">
+                                <div class="step-detail-title" style="color: #4caf50;">OUTPUT: Enrichment Card</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1; margin-top: 8px;">
+                                    Complete intelligence profile with company snapshot, buying signals, decision-makers, contact info, winning strategy & risks
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+                            <img src="./nuvei_visual_content/enrichment_card.jfif" alt="Enrichment Card Example" style="max-width: 40%; height: auto; border-radius: 8px; border: 2px solid #00d9ff; box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);">
+                            <div style="font-size: 0.75em; color: #94a3b8; margin-top: 12px; text-align: center;">Example Enrichment Card</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">STEP 7: Quality Scoring & STEP 8: Seller Matching Intro</h2>
+
+                    <div class="two-col" style="margin-top: 30px;">
+                        <div>
+                            <div class="section-title"><span class="number-circle">7</span>Quality Scoring</div>
+                            <div class="card" style="margin-top: 15px;">
+                                <div class="step-detail-title">Analyzes Enrichment Completeness</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                    Evaluates across dimensions:<br>
+                                    • Company data availability<br>
+                                    • Email contact availability<br>
+                                    • Phone contact availability<br>
+                                    • Signal strength (buying signals)<br>
+                                    • Context confidence (benchmarks vs company)<br><br>
+                                    <strong>Scale: 1-10 for each dimension</strong><br>
+                                    <strong>Status: APPROVED for matching if quality ≥ 7.0</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="section-title"><span class="number-circle">8</span>Seller Matching (Intro)</div>
+                            <div class="card" style="margin-top: 15px;">
+                                <div class="step-detail-title">Data-Driven AE Assignment</div>
+                                <div style="font-size: 0.9em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                    Input: Enrichment Card + 60 AE profiles (built from Gong history)<br><br>
+                                    Process: Score each AE using weighted algorithm<br><br>
+                                    Output: Top 3 ranked recommendations with scores<br><br>
+                                    <strong>Note:</strong> See next slide for detailed explanation of matching algorithm
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <strong>Key insight:</strong> AE profiles are built automatically from Gong call data—they represent real performance history, not subjective ratings.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 9: DEEP DIVE - SELLER MATCHING ALGORITHM -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">Deep Dive: Intelligent Seller Matching Algorithm</h2>
+
+                    <div class="two-col" style="margin-top: 30px; gap: 40px; align-items: start;">
+                        <div>
+                            <div class="card" style="background: rgba(0, 217, 255, 0.1); border-color: #00d9ff;">
+                                <div class="step-detail-title" style="color: #00d9ff;">How AE Profiles Are Built</div>
+                                <div style="font-size: 0.85em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                    <strong>Data Source:</strong> Gong call recordings (historical performance)<br>
+                                    <strong>Analysis:</strong> Vertical expertise, buyer personas handled, deal sizes closed, win rates, objection handling<br>
+                                    <strong>Output:</strong> Individual AE profile database (one profile per sales rep)
+                                </div>
+                            </div>
+
+                            <div class="card" style="margin-top: 12px; background: rgba(255, 193, 7, 0.1); border-color: #fbbf24;">
+                                <div class="step-detail-title" style="color: #fbbf24;">Weighted Scoring Formula</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1; line-height: 1.5; margin-top: 10px;">
+                                    Each AE scored across six dimensions (weights shown):<br><br>
+                                    • <strong>Vertical Specialty (30%):</strong> Expertise in the account's industry<br>
+                                    • <strong>Buyer Persona Alignment (20%):</strong> Track record with this type of decision-maker<br>
+                                    • <strong>Deal Size Capability (15%):</strong> Experience with similar deal values<br>
+                                    • <strong>Current Capacity (15%):</strong> Available bandwidth and workload<br>
+                                    • <strong>Quota Momentum (10%):</strong> Performance against current targets<br>
+                                    • <strong>Development Potential (10%):</strong> Coachability and growth trajectory<br><br>
+                                    <strong>Result: Composite score 0-10 per AE</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="card" style="background: rgba(76, 175, 80, 0.1); border-color: #4caf50;">
+                                <div class="step-detail-title" style="color: #4caf50;">Matching Process & Output</div>
+                                <div style="font-size: 0.85em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                    <strong>Input:</strong> Enrichment Card (account intelligence) + 60 AE profiles<br>
+                                    <strong>Algorithm:</strong> Score each AE against account characteristics<br>
+                                    <strong>Rank:</strong> Sort all 60 AEs by score (highest to lowest)<br>
+                                    <strong>Output:</strong> Top 3 ranked recommendations with detailed rationale<br>
+                                    <strong>Rotation Logic:</strong> Apply workload balancing to ensure fair distribution
+                                </div>
+                            </div>
+
+                            <div class="highlight-box" style="margin-top: 12px;">
+                                <strong>Why this works:</strong> Algorithm is data-driven (Gong history) rather than subjective. Weights reflect business priorities. Continuous feedback loop (Gong results) refines scoring monthly.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 10: MANAGER DECISION -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">STEP 9: Manager Decision & Approval</h2>
+
+                    <div class="two-col" style="margin-top: 30px;">
+                        <div>
+                            <div class="section-title"><span class="number-circle">9</span>Manager Review</div>
+                            <div style="font-size: 0.9em; color: #cbd5e1; margin-top: 15px;">Manager receives complete decision package.</div>
+                            <div class="card" style="margin-top: 15px;">
+                                <div class="step-detail-title">Display:</div>
+                                <div style="font-size: 0.85em; color: #cbd5e1; margin-top: 8px;">
+                                    Enrichment Card (full intelligence)<br>
+                                    Top 3 AE recommendations + scores<br>
+                                    Scoring rationale and breakdown
+                                </div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">Manager Options:</div>
+                                <div style="font-size: 0.85em; color: #cbd5e1; margin-top: 8px;">
+                                    ✓ Accept recommendation<br>
+                                    ✓ Choose alternative AE<br>
+                                    ✓ Override with reason<br>
+                                    ✓ Send back (need more data)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+                            <div class="section-title"><span class="number-circle">📱</span>Manager Notification</div>
+                            <img src="./nuvei_visual_content/manager_notification.jfif" alt="Manager Notification" style="max-width: 35%; height: auto; border-radius: 8px; border: 2px solid #00d9ff; box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); margin-top: 12px;">
+                        </div>
+                    </div>
+
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <strong>Time:</strong> 1-2 minutes for manager review and approval
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 11: SELLER READY -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">Seller Ready to Work</h2>
+                    <p class="slide-subtitle">Account Fully Prepared for Sales Action</p>
+
+                    <div class="two-col" style="margin-top: 30px;">
+                        <div>
+                            <div class="section-title"><span class="number-circle">✅</span>Status: Ready for Action</div>
+                            <div class="bullet-list">
+                                <div class="bullet-item"><span class="bullet-icon">•</span>Enrichment Card fully visible in Salesforce</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span>All context loaded: Company snapshot, buying signals, decision-makers with phones, winning angle</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span>Outreach strategy predefined</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span>Historical precedents and benchmarks available</div>
+                                <div class="bullet-item"><span class="bullet-icon">•</span>Ready to call NOW ☎️</div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: flex-start;">
+                            <div class="section-title"><span class="number-circle">✓</span>AE Receives Account</div>
+                            <img src="./nuvei_visual_content/ae_mobile_desktop.jfif" alt="AE Mobile & Desktop Views" style="max-width: 35%; height: auto; border-radius: 8px; border: 2px solid #00d9ff; box-shadow: 0 0 20px rgba(0, 217, 255, 0.3); margin-top: 12px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 12: SALESFORCE VISIBILITY -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">Salesforce Visibility & Integration</h2>
+
+                    <div class="two-col" style="margin-top: 30px; gap: 40px; align-items: center;">
+                        <div>
+                            <div class="card" style="background: rgba(0, 217, 255, 0.1); border-color: #00d9ff;">
+                                <div class="step-detail-title" style="color: #00d9ff;">How Accounts Appear in Salesforce</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                    <strong>Custom Fields (Synced Automatically):</strong><br>
+                                    Enrichment Status | Quality Score | Primary Decision-Maker (name, email, phone) | Buying Urgency Level | Estimated Deal Size | Estimated Sales Cycle | Recommended Winning Angle | Risk Flags & Assigned AE<br><br>
+
+                                    <strong>Salesforce List View:</strong><br>
+                                    "Ready for SDR Action" filtered view shows accounts meeting quality and assignment criteria for quick access<br><br>
+
+                                    <strong>Manager & AE Alerts:</strong><br>
+                                    Mobile push notification via Teams | Email summary with Enrichment Card | Dashboard widget showing pipeline status
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                            <img src="./nuvei_visual_content/salesforce_integration_views.jfif" alt="Salesforce Integration Views" style="max-width: 40%; height: auto; border-radius: 8px; border: 2px solid #00d9ff; box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);">
+                            <div style="font-size: 0.75em; color: #94a3b8; margin-top: 10px; text-align: center;">Salesforce Integration Examples</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 13: SCALABILITY -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">Scalability: Growing from 1,000 to 100,000+ Accounts</h2>
+
+                    <div class="highlight-box" style="margin-top: 20px;">
+                        <div style="font-weight: 700; color: #00d9ff; margin-bottom: 10px;">Infrastructure: AWS Lambda (Serverless)</div>
+                        <div style="font-size: 0.85em; line-height: 1.7; color: #cbd5e1;">
+                            1,000 accounts split into batches (50 each) → Lambda functions spawn CONCURRENTLY → Each processes all enrichment steps in parallel → All finish at same time → 1,000 accounts enriched in ~20 minutes
+                        </div>
+                    </div>
+
+                    <div class="two-col" style="margin-top: 20px;">
+                        <div class="card">
+                            <div class="step-detail-title">Cost Efficiency</div>
+                            <div style="font-size: 0.8em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                <strong>At 1,000 accounts/month:</strong> Variable costs per account + fixed infrastructure<br><br>
+                                <strong>At 10,000 accounts/month:</strong> Same variable costs per account, but fixed costs spread across larger volume<br><br>
+                                <strong>At 100,000+ accounts/month:</strong> Volume discounts with vendors + fixed costs amortized<br><br>
+                                <strong>Basis:</strong> Serverless architecture scales horizontally without re-architecture. Fixed costs are one-time setup.
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="step-detail-title">Processing & Quality</div>
+                            <div style="font-size: 0.8em; color: #cbd5e1; line-height: 1.6; margin-top: 10px;">
+                                <strong>Processing Time:</strong><br>
+                                1k, 10k, or 100k accounts → ~20 minutes (linear scaling via parallelization)<br><br>
+                                <strong>Quality Maintained:</strong> Enrichment quality slightly decreases with volume (acceptable trade-off) but stays actionable<br><br>
+                                <strong>Maintained via:</strong> Sampling validation (10% random audit), automated quality alerts, monthly feedback loop
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box" style="margin-top: 15px;">
+                        <strong>Key Insight:</strong> System does NOT require re-architecture to grow 10x or 100x. Same code, more Lambda functions. Cost per account may actually decrease due to economies of scale.
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 14: CASE EXAMPLE -->
+            <div class="slide slide-content">
+                <div class="content-wrapper" style="text-align: center;">
+                    <h2 class="slide-title">Real-World Example: ACME Corp</h2>
+                    <p class="slide-subtitle">Complete 18-Minute Workflow Walkthrough</p>
+
+                    <div style="margin-top: 20px; font-size: 0.75em; line-height: 1.8; color: #cbd5e1; display: inline-block; text-align: left;">
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">Day/Time:</strong> Monday 14:30 UTC - New account ACME Corp detected in system</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEP -1 (10s):</strong> DEDUP: Is ACME Corp existing? Domain: NO | LinkedIn ID: NO → NEW account, CONTINUE</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEP 0 (10s):</strong> VALIDATION: Domain ✓ | ICP ✓ | Not enriched 90d ✓ | SDR assigned ✓ → PASS</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEPS 1-5 (10min):</strong> PARALLEL ENRICHMENT: Clay (Company data: 150 emp, $25M revenue, Series B) ✓ | Claygent (VP Sales hired 30d ago, 6 jobs) ✓ | Signals (Series B $35M, EU expansion) ✓ | Context ($150k-$240k customers) ✓ | Phone (Partial) ⚠️</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEP 6 (2min):</strong> AGENT ANALYSIS: Series B SaaS + VP Sales hire = SCALING MODE | HIGH urgency, 90-day cycle | CFO controls budget | Winning angle: Scale operations without hiring | Risk: May consolidate with competitor</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEP 7 (10s):</strong> QUALITY SCORING: Company 100% | Emails 100% | Phones 67% | Signals strong | Context matched → APPROVED</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEP 8 (5s):</strong> SELLER MATCHING: Top AE based on vertical expertise, buyer persona fit, deal size history, capacity</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">STEP 9 (1min):</strong> MANAGER REVIEW: Enrichment Card + Top 3 AE recommendations → Approval</div>
+                        <div style="margin-bottom: 8px;"><strong style="color: #00d9ff;">15:00 UTC:</strong> ✅ SELLER READY: AE receives notification + Enrichment Card in Salesforce</div>
+                    </div>
+
+                    <div class="highlight-box" style="margin-top: 15px;">
+                        <strong>Total Time:</strong> Account to ready-to-call in 18 minutes | <strong>Expected Outcome:</strong> High-probability deal with clear strategy and decision-maker access
+                    </div>
+                </div>
+            </div>
+
+            <!-- SLIDE 15: FEEDBACK LOOP & SUMMARY -->
+            <div class="slide slide-content">
+                <div class="content-wrapper">
+                    <h2 class="slide-title">Continuous Learning & Summary</h2>
+
+                    <div class="two-col" style="margin-top: 30px;">
+                        <div>
+                            <div class="section-title"><span class="number-circle">→</span>Feedback Loop</div>
+                            <div class="card" style="margin-top: 15px;">
+                                <div class="step-detail-title">Gong Records Every Call</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">Automatic recording of SDR calls with ACME Corp and all accounts</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">AI Analyzes Outcome</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">Sentiment, objections, deal progression (won/lost/stalled)</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">Data Feeds System</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">Monthly: AE rankings refined based on real outcomes</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">Continuous Improvement</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">Better predictions next month → Higher close rates over time</div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="section-title"><span class="number-circle">◆</span>The Three Pillars</div>
+                            <div class="card" style="margin-top: 15px;">
+                                <div class="step-detail-title">1. Intelligent Deduplication</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">Prevents re-processing, maintains data integrity, optimizes costs</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">2. Multi-Layer Enrichment + AI</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">5 data sources + Claude synthesis = complete intelligence</div>
+                            </div>
+                            <div class="card" style="margin-top: 10px;">
+                                <div class="step-detail-title">3. Data-Driven Matching</div>
+                                <div style="font-size: 0.8em; color: #cbd5e1;">Gong-based AE profiles + continuous learning feedback loop</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- SLIDE 16: THE RESULT - FINAL CONCLUSION -->
+            <div class="slide slide-content">
+                <div class="content-wrapper" style="text-align: center;">
+                    <h2 class="slide-title">The Result</h2>
+                    <p class="slide-subtitle">Complete Transformation Through Intelligent Routing</p>
+
+                    <div style="margin-top: 60px;">
+                        <div style="font-size: 0.95em; color: #cbd5e1; line-height: 2.4; margin-bottom: 50px; max-width: 700px; margin-left: auto; margin-right: auto;">
+                            <div>Accounts enriched with complete context</div>
+                            <div>Assigned to optimal sales rep</div>
+                            <div>Ready to call in 18 minutes</div>
+                            <div>Continuously improving through feedback loop</div>
+                        </div>
+
+                        <div class="highlight-box" style="max-width: 700px; margin-left: auto; margin-right: auto;">
+                            <div style="font-size: 1em; font-weight: 700; background: linear-gradient(135deg, #00d9ff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                                Improved close rates, better SDR productivity, data-driven account routing
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVIGATION -->
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="changeSlide(-1)">←</button>
+            <div class="nav-dots" id="dots"></div>
+            <button class="nav-btn" onclick="changeSlide(1)">→</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 16;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        function initDots() {
+            const dotsContainer = document.getElementById('dots');
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+        }
+
+        function goToSlide(n) {
+            currentSlide = n;
+            showSlide();
+        }
+
+        function changeSlide(n) {
+            currentSlide += n;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            if (currentSlide < 0) currentSlide = 0;
+            showSlide();
+        }
+
+        function showSlide() {
+            const slides = document.getElementById('slides');
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            document.getElementById('current').textContent = currentSlide + 1;
+            document.querySelectorAll('.dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            document.querySelectorAll('.sidebar-item').forEach((item, i) => {
+                item.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') changeSlide(1);
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        initDots();
+        document.getElementById('total').textContent = totalSlides;
+    </script>
+</body>
+</html>
