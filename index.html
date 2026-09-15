@@ -491,6 +491,274 @@
         .slide {
             margin-left: 0;
         }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            body {
+                overflow: auto;
+            }
+
+            .deck {
+                height: auto;
+                min-height: 100vh;
+            }
+
+            .slides {
+                width: 100%;
+                height: auto;
+                flex-direction: column;
+                margin-left: 0 !important;
+            }
+
+            .slide {
+                width: 100%;
+                height: auto;
+                padding: 30px 20px 60px 20px;
+                justify-content: flex-start;
+                padding-top: 70px;
+            }
+
+            .slide::before {
+                width: 200px;
+                height: 200px;
+            }
+
+            .slide-hero h1 {
+                font-size: 2em;
+                margin-bottom: 20px;
+            }
+
+            .slide-hero .subtitle {
+                font-size: 1em;
+                margin-bottom: 20px;
+            }
+
+            .slide-hero .subsubtitle {
+                font-size: 0.85em;
+            }
+
+            .slide-title {
+                font-size: 1.6em;
+                margin-top: 20px;
+                margin-bottom: 15px;
+            }
+
+            .slide-subtitle {
+                font-size: 0.9em;
+                margin-bottom: 15px;
+            }
+
+            .content-wrapper {
+                max-width: 100%;
+            }
+
+            .two-col {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 20px !important;
+            }
+
+            .two-col > div {
+                width: 100% !important;
+            }
+
+            .sidebar {
+                width: 200px;
+                left: -200px;
+                padding: 20px 10px;
+            }
+
+            .sidebar-title {
+                font-size: 0.7em;
+                margin-bottom: 15px;
+            }
+
+            .sidebar-item {
+                font-size: 0.7em;
+                padding: 8px 8px;
+                margin-bottom: 6px;
+            }
+
+            .sidebar.open ~ .slides {
+                margin-left: 0;
+            }
+
+            .sidebar-toggle {
+                left: 15px;
+                top: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3em;
+            }
+
+            .sidebar.open ~ .sidebar-toggle {
+                left: 15px;
+            }
+
+            .slide-counter {
+                left: 65px;
+                top: 20px;
+                font-size: 0.8em;
+            }
+
+            .nav-buttons {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                gap: 15px;
+            }
+
+            .nav-btn {
+                width: 35px;
+                height: 35px;
+                font-size: 1em;
+            }
+
+            .nav-dots {
+                gap: 8px;
+            }
+
+            .dot {
+                width: 10px;
+                height: 10px;
+            }
+
+            .section-title {
+                font-size: 1em;
+            }
+
+            .section-content {
+                font-size: 0.85em;
+            }
+
+            .card {
+                padding: 12px;
+                margin-bottom: 10px;
+            }
+
+            .step-detail {
+                font-size: 0.8em;
+                padding: 12px;
+                margin: 8px 0;
+            }
+
+            .step-detail-title {
+                font-size: 0.85em;
+            }
+
+            .highlight-box {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            .number-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9em;
+            }
+
+            .bullet-list {
+                gap: 8px;
+                margin-top: 10px;
+            }
+
+            .bullet-item {
+                font-size: 0.8em;
+                gap: 8px;
+            }
+
+            img {
+                max-width: 100% !important;
+                height: auto !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .slide {
+                padding: 20px 15px 50px 15px;
+                padding-top: 70px;
+            }
+
+            .slide-hero h1 {
+                font-size: 1.4em;
+                line-height: 1.2;
+                margin-bottom: 15px;
+            }
+
+            .slide-hero .subtitle {
+                font-size: 0.85em;
+            }
+
+            .slide-title {
+                font-size: 1.3em;
+                margin-top: 15px;
+                margin-bottom: 12px;
+            }
+
+            .slide-subtitle {
+                font-size: 0.8em;
+                margin-bottom: 12px;
+            }
+
+            .section-title {
+                font-size: 0.9em;
+            }
+
+            .section-content {
+                font-size: 0.75em;
+            }
+
+            .card {
+                padding: 10px;
+                margin-bottom: 8px;
+            }
+
+            .nav-buttons {
+                bottom: 10px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9em;
+            }
+
+            .sidebar {
+                width: 180px;
+                left: -180px;
+                padding: 15px 8px;
+            }
+
+            .sidebar-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1em;
+            }
+
+            .slide-counter {
+                font-size: 0.7em;
+                left: 55px;
+                top: 12px;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+
+            .number-circle {
+                width: 30px;
+                height: 30px;
+                font-size: 0.8em;
+            }
+
+            .highlight-box {
+                padding: 12px;
+                margin: 12px 0;
+            }
+        }
     </style>
 </head>
 <body>
