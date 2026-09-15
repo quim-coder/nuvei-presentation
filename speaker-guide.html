@@ -299,6 +299,7 @@
                 <div class="toc-item"><a onclick="scrollTo('slide14')">14. ACME Case</a></div>
                 <div class="toc-item"><a onclick="scrollTo('slide15')">15. Learning Loop</a></div>
                 <div class="toc-item"><a onclick="scrollTo('slide16')">16. The Result</a></div>
+                <div class="toc-item"><a onclick="scrollTo('extras')" style="color: #00ff88; font-weight: 700;">Bonus Ideas</a></div>
             </div>
         </div>
 
@@ -896,6 +897,219 @@
             <div class="tip-box">
                 <strong>Tip:</strong>
                 <div class="tip-content">End strong. This design shows analytical thinking (the workflow), practical thinking (phased implementation), and ambitious thinking (100K scale). You've answered the core question: How would I build this?"</div>
+            </div>
+        </div>
+
+        <!-- ADDITIONAL IDEAS -->
+        <div class="slide-section" id="extras">
+            <span class="slide-number">BONUS IDEAS</span>
+            <h2 class="slide-title">Additional Ideas & Future Roadmap</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px; font-size: 0.95em;">Post-presentation thinking — innovations to layer on top of the core system</p>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">1. Predictive Close Probability Scoring</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Build an ML model that predicts close probability (0-100%) for each account based on:
+                    <br>• Company size + industry + funding stage
+                    <br>• Buyer persona type
+                    <br>• Deal stage assessment
+                    <br>• Historical win rate of assigned AE on similar accounts
+                    <br>• Competitive threat level
+                    <br>• Seasonal buying patterns
+                    <br><br>
+                    <strong>Why:</strong> AEs could prioritize high-probability accounts first. Managers get accurate pipeline forecasting. You can identify accounts likely to stall early and trigger interventions.
+                    <br><br>
+                    <strong>Implementation:</strong> Requires 6-12 months of outcome data to train. Start with a simple logistic regression, graduate to XGBoost.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">2. Real-Time Competitive Intelligence</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Integrate competitive tracking (ZoomInfo, Bombora, G2 signals) into enrichment. Flag if:
+                    <br>• Account is actively looking at competitors
+                    <br>• They just viewed competitor pricing page
+                    <br>• They're in the consideration phase for a competitor
+                    <br>• Industry analyst report mentions them (could mean RFP coming)
+                    <br><br>
+                    <strong>Why:</strong> Time your outreach to beat competitors. If they're in consideration phase, your AE can call with a competitive comparison angle.
+                    <br><br>
+                    <strong>Implementation:</strong> Partner with intent data provider (Demandbase, 6sense, Bombora). Add 'intent score' to enrichment card.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">3. Account Clustering & Lookalike Modeling</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Use ML clustering to group accounts by similarity. Once you identify your ideal customers, use clustering to find lookalike accounts.
+                    <br><br>
+                    <strong>Example:</strong> You've won 50 Series B SaaS companies with 50-200 employees. Use clustering to find 500 similar accounts in your database. Prioritize enrichment/outreach on those.
+                    <br><br>
+                    <strong>Why:</strong> Instead of enriching randomly, focus on accounts most likely to convert. Improves efficiency, reduces wasted API spend.
+                    <br><br>
+                    <strong>Implementation:</strong> Use K-means or DBSCAN clustering on company features. Monthly updates as you win new customers.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">4. Dynamic Territory & Capacity Balancing</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Instead of static territory assignments, dynamically balance accounts based on:
+                    <br>• AE current pipeline size (if someone's at 80% capacity, route lighter deals to them)
+                    <br>• Account territory (prefer matching, but balance if territory is overloaded)
+                    <br>• Deal size distribution (if one AE gets 5 large deals in a row, route small deals to colleagues)
+                    <br>• Workload forecast (look at 30-90 day pipeline, not just today)
+                    <br><br>
+                    <strong>Why:</strong> Prevents burnout. Ensures deals close on time (not because AE is drowning). More equitable earnings for the team.
+                    <br><br>
+                    <strong>Implementation:</strong> Add a 'capacity reservation' system. When an account is assigned, it reserves capacity. Updates daily based on pipeline.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">5. Automated Win/Loss Analysis</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> After a deal closes (won or lost), auto-trigger a brief survey or call recording analysis to extract:
+                    <br>• Why we won (feature? price? relationship? alternative?)
+                    <br>• Why we lost (if applicable): competitor win? budget cut? timeline extended?
+                    <br>• Buyer sentiment on AI/automation in their process
+                    <br>• Unexpected objections or buying committee composition
+                    <br><br>
+                    <strong>Why:</strong> Close the feedback loop faster. Instead of waiting 3 months for win/loss, you learn after every deal. Iterate faster.
+                    <br><br>
+                    <strong>Implementation:</strong> Use Gong for recording analysis, or send a 2-minute survey post-close. Summarize findings monthly.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">6. Multi-Account Opportunity Detection</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> For high-value customers, enrich subsidiary companies and related accounts automatically.
+                    <br><br>
+                    <strong>Example:</strong> You close Acme Corp. Acme has 3 subsidiaries. Auto-enrich those subsidiaries and route to the same AE (cross-sell/upsell potential).
+                    <br><br>
+                    <strong>Why:</strong> Land-and-expand strategy automation. You identify expansion opportunities before your AE has to hunt for them.
+                    <br><br>
+                    <strong>Implementation:</strong> Use company hierarchy data from Clay or ZoomInfo. When a customer is onboarded, surface related entities.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">7. AE Career Development Scoring</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Alongside assigning high-value deals to top AEs, intentionally route some medium-value deals to junior AEs in areas they need to develop.
+                    <br><br>
+                    <strong>Example:</strong> Sarah is great with VP Sales but weak with CTOs. Route a mid-size CTO account to her (with manager oversight). She gains experience, team gains bench strength.
+                    <br><br>
+                    <strong>Why:</strong> Develops your team, reduces hero-worship of top AEs, builds resilience.
+                    <br><br>
+                    <strong>Implementation:</strong> Add 'career development goal' field to AE profile. Factor into assignment algo: 70% optimize for win rate, 30% optimize for learning.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">8. Buying Committee Mapping & Consensus Scoring</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Use AI + web scraping to identify the full buying committee (not just the decision-maker):
+                    <br>• LinkedIn pulls who reports to the decision-maker
+                    <br>• AI infers committee structure (who influences, who approves, who blocks)
+                    <br>• Map consensus signals (are stakeholders aligned? is there friction?)
+                    <br><br>
+                    <strong>Why:</strong> Sales is 80% about navigating consensus. If you know the committee structure and potential conflicts upfront, your AE calls with a map.
+                    <br><br>
+                    <strong>Implementation:</strong> Enhance Claygent to generate org chart + influence map. Display as visual in Salesforce.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">9. Pricing & Deal Structure Recommendation Engine</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Based on company size, industry, funding stage, and historical customer cohorts, recommend:
+                    <br>• Likely budget range (small, medium, enterprise)
+                    <br>• Contract length they'd prefer (1-year, 3-year, multi-year)
+                    <br>• Upsell/cross-sell strategy (modules to bundle, expansion plays)
+                    <br>• Discount strategy (how much can we give and still hit margin?)
+                    <br><br>
+                    <strong>Why:</strong> AEs don't leave money on the table or undersell. Pricing recommendations shorten negotiation.
+                    <br><br>
+                    <strong>Implementation:</strong> Build from closed deal data. Create pricing matrices by segment. Update quarterly.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">10. Trigger-Based Outreach Sequencing</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Don't just enrich once. Continuously monitor accounts for triggers and auto-escalate:
+                    <br>• Funding announced? Bump priority. (Scaling signal)
+                    <br>• New hire in target role? Auto-add to team, queue intro email.
+                    <br>• Competitor loss detected? (Using technographics) → Outreach with migration angle.
+                    <br>• Industry analyst report mentions them? → Thought leadership angle.
+                    <br><br>
+                    <strong>Why:</strong> Instead of static account lists, sales operates on dynamic signals. Timing is everything.
+                    <br><br>
+                    <strong>Implementation:</strong> Set up webhooks from signal providers (Signals, Crunchbase, Bombora). Auto-trigger workflows in your CRM.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">11. Manager Coaching & Deal Guidance Automation</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> As AE works a deal, the system monitors and offers real-time guidance:
+                    <br>• Call transcription detects objection → Suggest handle from playbook
+                    <br>• Deal stalls for 14 days → Alert manager + suggest next step
+                    <br>• AE hasn't done discovery yet (based on activity) → Flag for coaching
+                    <br>• Competition detected → Suggest battle card
+                    <br><br>
+                    <strong>Why:</strong> Prevents deals from going dark. Coaches managers proactively, not reactively.
+                    <br><br>
+                    <strong>Implementation:</strong> Integrate Gong for call intelligence. Build rules engine for deal health scoring.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">12. Expansion Strategy Automation (Land & Expand)</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> For existing customers, auto-identify expansion opportunities:
+                    <br>• Subsidiary or related company just got funded? Upsell opportunity.
+                    <br>• Customer just hired in a new department? New use case/module.
+                    <br>• Competitor offering integrated solution? Cross-sell bundled offering.
+                    <br>• Customer hitting usage limits? Upgrade trigger.
+                    <br><br>
+                    <strong>Why:</strong> Expansion is cheaper than acquisition. Automate the hunting.
+                    <br><br>
+                    <strong>Implementation:</strong> Apply same enrichment pipeline to existing customers. Route opportunities to CSM or account manager.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">13. Churn Risk Prediction & Retention Routing</div>
+                <div class="section-content">
+                    <strong>Idea:</strong> Build a churn prediction model. Accounts at high churn risk get routed to:
+                    <br>• Executive sponsor (relationship rescue)
+                    <br>• Product specialist (help them succeed)
+                    <br>• Success team (proactive outreach)
+                    <br><br>
+                    <strong>Why:</strong> Saves accounts before they leave. Retention is 5-10x cheaper than acquisition.
+                    <br><br>
+                    <strong>Implementation:</strong> Logistic regression on: usage declining, NPS drop, support ticket spike, etc. Weekly churn scores.
+                </div>
+            </div>
+
+            <div class="slide-section" style="background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); margin-top: 20px;">
+                <div class="section-title">How to Present These Ideas</div>
+                <div class="section-content" style="background: rgba(0, 217, 255, 0.08); padding: 15px; border-radius: 6px; border-left: 4px solid #00d9ff;">
+                    <strong>During the interview, if asked about future roadmap or improvements:</strong>
+                    <br><br>
+                    "I designed the core system — enrichment + matching + feedback loop — to be the foundation. But after presenting it, I realized there are natural next layers:
+                    <br><br>
+                    Near-term (6-12 months): Predictive close probability, competitive intelligence, territory balancing. These amplify ROI.
+                    <br><br>
+                    Mid-term (12-18 months): Win/loss automation, buying committee mapping, pricing recommendations. These move from reactive (responding to deals) to proactive (shaping them).
+                    <br><br>
+                    Long-term (18+ months): Expansion automation, churn prediction, manager coaching AI. These shift the entire sales model from hunting to nurturing.
+                    <br><br>
+                    The elegance is that the core system scales to all of these. Each layer adds value without re-architecting."
+                </div>
             </div>
         </div>
 
