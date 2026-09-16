@@ -1524,10 +1524,12 @@
             const card = e.target.closest('.card, .highlight-box');
             if (card && !e.target.closest('button, input, a')) {
                 e.stopPropagation();
-                const clonedContent = card.cloneNode(true);
+                const clonedCard = card.cloneNode(true);
                 // Remove button elements if any
-                clonedContent.querySelectorAll('button').forEach(btn => btn.remove());
-                document.getElementById('modalContentBody').innerHTML = clonedContent.innerHTML;
+                clonedCard.querySelectorAll('button').forEach(btn => btn.remove());
+                // Keep all styling - just clone the entire card
+                document.getElementById('modalContentBody').innerHTML = '';
+                document.getElementById('modalContentBody').appendChild(clonedCard);
                 document.getElementById('contentModal').style.display = 'block';
             }
         });
