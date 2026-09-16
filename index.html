@@ -1289,6 +1289,10 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') changeSlide(1);
             if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                goToSlide(3); // Slide 4 is at index 3 (Workflow)
+            }
         });
 
         // Handle browser back button
