@@ -456,37 +456,38 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             animation: fadeIn 0.3s ease;
-            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .content-modal.show {
+            display: flex;
         }
 
         .content-modal-content {
             position: relative;
             background: white;
-            margin: auto;
-            padding: 60px;
             border-radius: 12px;
-            max-width: 1000px;
-            width: 90%;
-            max-height: 85vh;
+            max-width: 900px;
+            width: 100%;
+            max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
             animation: slideIn 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            padding: 40px;
         }
 
         #modalContentBody {
             width: 100%;
-            transform: scale(1.3);
-            transform-origin: center;
-            font-size: 1.2em;
+            transform: scale(1.2);
+            transform-origin: center top;
         }
 
         #modalContentBody .card,
         #modalContentBody .highlight-box {
-            padding: 30px !important;
-            font-size: 1em !important;
+            padding: 25px !important;
         }
 
         .content-modal-close {
@@ -1535,7 +1536,7 @@
         // Content modal functionality
         function closeContentModal(event) {
             if (event && event.target.id !== 'contentModal') return;
-            document.getElementById('contentModal').style.display = 'none';
+            document.getElementById('contentModal').classList.remove('show');
         }
 
         // Make all cards and boxes clickable
@@ -1549,7 +1550,7 @@
                 // Keep all styling - just clone the entire card
                 document.getElementById('modalContentBody').innerHTML = '';
                 document.getElementById('modalContentBody').appendChild(clonedCard);
-                document.getElementById('contentModal').style.display = 'block';
+                document.getElementById('contentModal').classList.add('show');
             }
         });
     </script>
