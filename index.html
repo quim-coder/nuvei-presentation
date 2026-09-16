@@ -1273,6 +1273,8 @@
             showSlide();
             // Add to browser history so back button works
             window.history.pushState({slide: n}, `Slide ${n + 1}`, `?slide=${n}`);
+            // Restore focus to body so keyboard events work
+            document.body.focus();
         }
 
         function changeSlide(n) {
