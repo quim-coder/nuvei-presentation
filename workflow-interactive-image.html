@@ -431,28 +431,10 @@
             }
         };
 
-        let currentStepInfo = null;
-
         function handleStepClick(step) {
             const info = stepInfo[step];
             if (info) {
-                currentStepInfo = info;
-                // Show modal instead of navigating directly
-                document.getElementById('modalTitle').textContent = info.title;
-                document.getElementById('modalDescription').textContent = info.description;
-                document.getElementById('modalTime').textContent = info.time;
-                document.getElementById('stepModal').style.display = 'block';
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('stepModal').style.display = 'none';
-        }
-
-        function navigateToSlide() {
-            const info = currentStepInfo;
-            if (info) {
-                // Check if we're inside an iframe
+                // Navigate directly to the slide
                 if (window.parent !== window && window.parent.goToSlide) {
                     // We're in an iframe and parent has goToSlide function
                     window.parent.goToSlide(info.slideNumber);
@@ -462,16 +444,7 @@
                     window.location.href = 'index.html';
                 }
             }
-            closeModal();
         }
-
-        // Close modal when clicking outside of it
-        window.addEventListener('click', (e) => {
-            const modal = document.getElementById('stepModal');
-            if (e.target === modal) {
-                closeModal();
-            }
-        });
 
         // Make SVG responsive
         const wrapper = document.getElementById('workflowWrapper');
