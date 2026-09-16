@@ -456,38 +456,23 @@
             height: 100%;
             background-color: rgba(0, 0, 0, 0.7);
             animation: fadeIn 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-        }
-
-        .content-modal.show {
-            display: flex;
+            overflow-y: auto;
+            padding: 40px 20px;
         }
 
         .content-modal-content {
             position: relative;
             background: white;
             border-radius: 12px;
-            max-width: 900px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
+            max-width: 850px;
+            margin: 50px auto;
             box-shadow: 0 10px 50px rgba(0, 0, 0, 0.3);
             animation: slideIn 0.3s ease;
-            padding: 40px;
+            padding: 30px;
         }
 
         #modalContentBody {
             width: 100%;
-            transform: scale(1.2);
-            transform-origin: center top;
-        }
-
-        #modalContentBody .card,
-        #modalContentBody .highlight-box {
-            padding: 25px !important;
         }
 
         .content-modal-close {
@@ -1536,7 +1521,7 @@
         // Content modal functionality
         function closeContentModal(event) {
             if (event && event.target.id !== 'contentModal') return;
-            document.getElementById('contentModal').classList.remove('show');
+            document.getElementById('contentModal').style.display = 'none';
         }
 
         // Make all cards and boxes clickable
@@ -1545,12 +1530,10 @@
             if (card && !e.target.closest('button, input, a')) {
                 e.stopPropagation();
                 const clonedCard = card.cloneNode(true);
-                // Remove button elements if any
                 clonedCard.querySelectorAll('button').forEach(btn => btn.remove());
-                // Keep all styling - just clone the entire card
                 document.getElementById('modalContentBody').innerHTML = '';
                 document.getElementById('modalContentBody').appendChild(clonedCard);
-                document.getElementById('contentModal').classList.add('show');
+                document.getElementById('contentModal').style.display = 'block';
             }
         });
     </script>
