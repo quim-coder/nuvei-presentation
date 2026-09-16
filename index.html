@@ -1263,6 +1263,8 @@
         function goToSlide(n) {
             currentSlide = n;
             showSlide();
+            // Add to browser history so back button works
+            window.history.pushState({slide: n}, `Slide ${n + 1}`, `?slide=${n}`);
         }
 
         function changeSlide(n) {
@@ -1287,6 +1289,14 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') changeSlide(1);
             if (e.key === 'ArrowLeft') changeSlide(-1);
+        });
+
+        // Handle browser back button
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.slide !== undefined) {
+                currentSlide = e.state.slide;
+                showSlide();
+            }
         });
 
         initDots();
