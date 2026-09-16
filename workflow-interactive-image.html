@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Workflow Diagram - Nuvei</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.2em;
+            color: #0c98d4;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            color: #666666;
+            margin-bottom: 30px;
+        }
+
+        .instructions {
+            background: rgba(12, 152, 212, 0.08);
+            border-left: 4px solid #0c98d4;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-size: 0.95em;
+            color: #333333;
+        }
+
+        .workflow-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .workflow-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .clickable-area {
+            fill: transparent;
+            transition: fill 0.2s ease;
+            stroke: transparent;
+            stroke-width: 2;
+        }
+
+        .clickable-area:hover {
+            fill: rgba(12, 152, 212, 0.15);
+            stroke: #0c98d4;
+        }
+
+        .tooltip {
+            position: absolute;
+            background: #0c98d4;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .clickable-area:hover + .tooltip {
+            opacity: 1;
+        }
+
+        .legend {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(12, 152, 212, 0.06);
+            border-radius: 8px;
+        }
+
+        .legend-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #0c98d4;
+            margin-bottom: 16px;
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 12px;
+        }
+
+        .legend-item {
+            padding: 12px;
+            background: rgba(12, 152, 212, 0.04);
+            border-left: 3px solid #0c98d4;
+            border-radius: 4px;
+            font-size: 0.95em;
+            color: #333333;
+        }
+
+        .legend-item-number {
+            font-weight: 600;
+            color: #0c98d4;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.6em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .instructions {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Interactive Workflow Diagram</h1>
+            <p class="subtitle">Click on any step to see details or navigate</p>
+            <div class="instructions">
+                <strong>💡 Tip:</strong> Hover over the colored areas or click them to interact. Each step is clickable and will show you more information or navigate to the corresponding slide.
+            </div>
+        </header>
+
+        <div class="workflow-wrapper" id="workflowWrapper">
+            <img src="nuvei_visual_content/workflow_diagram.jfif" alt="Workflow Diagram" class="workflow-image" id="workflowImage">
+
+            <svg id="interactiveSvg" viewBox="0 0 2816 1536" preserveAspectRatio="xMidYMid slice">
+                <!-- STEP -1: DEDUP CHECK -->
+                <rect class="clickable-area" x="338" y="184" width="479" height="261" data-step="-1" data-name="STEP -1: Intelligent Deduplication" onclick="handleStepClick(-1)"></rect>
+
+                <!-- STEP 0: PRE-VALIDATION GATE -->
+                <rect class="clickable-area" x="1183" y="169" width="479" height="276" data-step="0" data-name="STEP 0: Validation Gate" onclick="handleStepClick(0)"></rect>
+
+                <!-- L1: CLAY APIs -->
+                <rect class="clickable-area" x="84" y="568" width="338" height="184" data-step="L1" data-name="L1: Clay APIs - Company Enrichment" onclick="handleStepClick('L1')"></rect>
+
+                <!-- L2: CLAYGENT AI -->
+                <rect class="clickable-area" x="479" y="568" width="338" height="184" data-step="L2" data-name="L2: Claygent AI - Culture & Hiring" onclick="handleStepClick('L2')"></rect>
+
+                <!-- L3: MARKET SIGNALS -->
+                <rect class="clickable-area" x="845" y="568" width="338" height="184" data-step="L3" data-name="L3: Market Signals - Buying Signals" onclick="handleStepClick('L3')"></rect>
+
+                <!-- L4: INTERNAL CONTEXT -->
+                <rect class="clickable-area" x="1211" y="568" width="338" height="184" data-step="L4" data-name="L4: Internal Context - Company Data" onclick="handleStepClick('L4')"></rect>
+
+                <!-- L5: PHONE ENRICHMENT -->
+                <rect class="clickable-area" x="1603" y="568" width="338" height="184" data-step="L5" data-name="L5: Phone Enrichment - Decision Makers" onclick="handleStepClick('L5')"></rect>
+
+                <!-- STEP 6: AGENT AI ANALYSIS (Arriba) -->
+                <rect class="clickable-area" x="845" y="799" width="1042" height="154" data-step="6" data-name="STEP 6: Agent AI Analysis" onclick="handleStepClick(6)"></rect>
+
+                <!-- STEP 6: INTELLIGENT DATA SYNTHESIS (Izquierda) -->
+                <rect class="clickable-area" x="169" y="952" width="648" height="384" data-step="6-left" data-name="STEP 6: Intelligent Data Synthesis" onclick="handleStepClick('6-left')"></rect>
+
+                <!-- STEP 7: DATA QUALITY CHECK -->
+                <rect class="clickable-area" x="928" y="968" width="1155" height="92" data-step="7" data-name="STEP 7: Data Quality Check" onclick="handleStepClick(7)"></rect>
+
+                <!-- STEP 8: SELLER MATCHING ALGORITHM -->
+                <rect class="clickable-area" x="928" y="1075" width="1155" height="123" data-step="8" data-name="STEP 8: Seller Matching Algorithm" onclick="handleStepClick(8)"></rect>
+
+                <!-- STEP 9: HUMAN APPROVAL + OVERRIDE -->
+                <rect class="clickable-area" x="928" y="1229" width="1155" height="92" data-step="9" data-name="STEP 9: Human Approval + Override" onclick="handleStepClick(9)"></rect>
+
+                <!-- FINAL OUTPUT: SELLER READY TO WORK -->
+                <rect class="clickable-area" x="1014" y="1352" width="676" height="123" data-step="final" data-name="Final Output: Seller Ready to Work" onclick="handleStepClick('final')"></rect>
+
+                <!-- SALESFORCE VISIBILITY (CRITICAL) -->
+                <rect class="clickable-area" x="2225" y="169" width="535" height="614" data-step="salesforce" data-name="Salesforce Visibility & Integration" onclick="handleStepClick('salesforce')"></rect>
+
+                <!-- SCALABILITY CONSIDERATIONS -->
+                <rect class="clickable-area" x="2225" y="799" width="535" height="676" data-step="scalability" data-name="Scalability Considerations" onclick="handleStepClick('scalability')"></rect>
+            </svg>
+        </div>
+
+        <div class="legend">
+            <div class="legend-title">📍 Workflow Steps</div>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="legend-item-number">STEP -1:</span> Intelligent Deduplication — Prevents duplicate accounts
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">STEP 0:</span> Validation Gate — Filters by ICP criteria
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">STEPS 1-5:</span> Parallel Enrichment — 5 data sources simultaneously
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">STEP 6:</span> Agent AI Analysis — Claude AI synthesis
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">STEP 7:</span> Quality Scoring — Rank by fit & opportunity
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">STEP 8:</span> Seller Matching — Algorithm-based assignment
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">STEP 9:</span> Manager Approval — Final human override
+                </div>
+                <div class="legend-item">
+                    <span class="legend-item-number">FINAL:</span> Account ready in Salesforce for SDR action
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Store step information
+        const stepInfo = {
+            '-1': {
+                title: 'STEP -1: Intelligent Deduplication',
+                description: 'Prevents duplicate accounts from entering the system by matching against existing data using domain and LinkedIn comparison.',
+                time: '2 seconds',
+                slideNumber: 4
+            },
+            '0': {
+                title: 'STEP 0: Validation Gate',
+                description: 'Filters accounts that don\'t meet ICP criteria. Validates domain format, company size, industry, and geographic criteria.',
+                time: '3 seconds',
+                slideNumber: 5
+            },
+            'L1': {
+                title: 'L1: Clay APIs - Company Enrichment',
+                description: 'Enriches company information including demographics, emails, phones, ZoomInfo, Apollo, Hunter data.',
+                time: '5 min',
+                slideNumber: 5
+            },
+            'L2': {
+                title: 'L2: Claygent AI - Culture & Hiring',
+                description: 'Analyzes culture signals, hiring, funding trends. Sources: Claygent, LI Jobs, Builtwith.',
+                time: '5-10 min',
+                slideNumber: 5
+            },
+            'L3': {
+                title: 'L3: Market Signals - Buying Signals',
+                description: 'Identifies buying signals through funding events, tech stack, and market trends.',
+                time: '5-10 min',
+                slideNumber: 5
+            },
+            'L4': {
+                title: 'L4: Internal Context - Company Data',
+                description: 'Gathers internal company data including benchmarks, decision-maker info, and Salesforce query data.',
+                time: '2-3 min',
+                slideNumber: 5
+            },
+            'L5': {
+                title: 'L5: Phone Enrichment - Decision Makers',
+                description: 'Enriches mobile office decision-maker lines. Sources: Hunter, Apollo, RocketReach.',
+                time: '3 min',
+                slideNumber: 5
+            },
+            '6-left': {
+                title: 'STEP 6: Intelligent Data Synthesis',
+                description: 'Claude AI synthesizes all enriched data: company snapshots, pain identification, hiring signals, deal size, decision-maker ranking, and risk assessment.',
+                time: '10 min',
+                slideNumber: 6
+            },
+            '6': {
+                title: 'STEP 6: Agent AI Analysis',
+                description: 'Completeness check: culture signals, hiring, funding, careers analysis, ontension-maker ranking, winning angle.',
+                time: '10 min',
+                slideNumber: 6
+            },
+            '7': {
+                title: 'STEP 7: Data Quality Check',
+                description: 'Validates data completeness (100% email coverage, phone coverage 67%, signal strength 5/8, content confidence 95%).',
+                time: '10 seconds',
+                slideNumber: 7
+            },
+            '8': {
+                title: 'STEP 8: Seller Matching Algorithm',
+                description: 'Weighted scoring algorithm: Territory 30%, Relevance 20%, Quota momentum 15%, Capacity 15%, Development 10%. Top 3 AE rankings displayed.',
+                time: '5 seconds',
+                slideNumber: 7
+            },
+            '9': {
+                title: 'STEP 9: Human Approval + Override',
+                description: 'Manager can accept, choose alternative, override, or send back. All options available with full control.',
+                time: '1-2 min',
+                slideNumber: 9
+            },
+            'final': {
+                title: 'Final Output: Seller Ready to Work',
+                description: 'Account is fully enriched, scored, matched, and ready for the SDR to call. Enrichment card visible in Salesforce. Complete workflow takes 18 minutes total.',
+                time: '18 minutes total',
+                slideNumber: 10
+            },
+            'salesforce': {
+                title: 'Salesforce Visibility & Integration',
+                description: 'All enrichment data synced to Salesforce with custom fields showing enrichment status, quality score, buying urgency, SDR action, and deal team info.',
+                time: 'Real-time',
+                slideNumber: 11
+            }
+        };
+
+        function handleStepClick(step) {
+            const info = stepInfo[step];
+            if (info) {
+                // Navigate to the corresponding slide in index.html
+                sessionStorage.setItem('targetSlide', info.slideNumber);
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Make SVG responsive
+        const wrapper = document.getElementById('workflowWrapper');
+        const svg = document.getElementById('interactiveSvg');
+        const img = document.getElementById('workflowImage');
+
+        function resizeSvg() {
+            svg.style.width = img.offsetWidth + 'px';
+            svg.style.height = img.offsetHeight + 'px';
+        }
+
+        img.addEventListener('load', resizeSvg);
+        window.addEventListener('resize', resizeSvg);
+
+        // Initial resize
+        setTimeout(resizeSvg, 100);
+    </script>
+</body>
+</html>

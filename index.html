@@ -1291,6 +1291,17 @@
 
         initDots();
         document.getElementById('total').textContent = totalSlides;
+
+        // Check if there's a target slide from the interactive workflow
+        const targetSlide = sessionStorage.getItem('targetSlide');
+        if (targetSlide !== null) {
+            const slideNumber = parseInt(targetSlide, 10);
+            if (slideNumber >= 0 && slideNumber < totalSlides) {
+                goToSlide(slideNumber);
+            }
+            // Clear the target slide so it doesn't navigate again on refresh
+            sessionStorage.removeItem('targetSlide');
+        }
     </script>
 </body>
 </html>
