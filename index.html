@@ -697,7 +697,7 @@
         }
     </style>
 </head>
-<body>
+<body tabindex="0">
     <div class="deck">
         <img src="nuvei_visual_content/Nuvei_Logo.png" alt="Nuvei Logo" style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); height: 40px; z-index: 999; pointer-events: none;">
         <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()">☰</button>
@@ -1294,10 +1294,10 @@
             });
         }
 
-        // Ensure window has focus for keyboard events
-        window.focus();
+        // Focus body to enable keyboard events immediately
+        document.body.focus();
 
-        window.addEventListener('keydown', (e) => {
+        document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') changeSlide(1);
             if (e.key === 'ArrowLeft') changeSlide(-1);
             if (e.key === ' ' || e.key === 'Enter') {
