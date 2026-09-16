@@ -1302,6 +1302,9 @@
         initDots();
         document.getElementById('total').textContent = totalSlides;
 
+        // Initialize browser history with starting slide
+        window.history.replaceState({slide: 0}, 'Slide 1', '?slide=0');
+
         // Check if there's a target slide from the interactive workflow
         const targetSlide = sessionStorage.getItem('targetSlide');
         if (targetSlide !== null) {
@@ -1312,6 +1315,14 @@
             // Clear the target slide so it doesn't navigate again on refresh
             sessionStorage.removeItem('targetSlide');
         }
+
+        // Handle browser back/forward buttons
+        window.addEventListener('popstate', (e) => {
+            if (e.state && e.state.slide !== undefined) {
+                currentSlide = e.state.slide;
+                showSlide();
+            }
+        });
     </script>
 </body>
 </html>
