@@ -363,6 +363,14 @@
             border-color: #0c98d4;
         }
 
+        .dot.workflow {
+            background: #003d82;
+        }
+
+        .dot.workflow:hover {
+            border-color: #003d82;
+        }
+
         .slide-counter {
             position: absolute;
             top: 30px;
@@ -1254,7 +1262,7 @@
             const dotsContainer = document.getElementById('dots');
             for (let i = 0; i < totalSlides; i++) {
                 const dot = document.createElement('div');
-                dot.className = 'dot' + (i === 0 ? ' active' : '');
+                dot.className = 'dot' + (i === 0 ? ' active' : '') + (i === 3 ? ' workflow' : '');
                 dot.onclick = () => goToSlide(i);
                 dotsContainer.appendChild(dot);
             }
