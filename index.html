@@ -1294,7 +1294,10 @@
             });
         }
 
-        document.addEventListener('keydown', (e) => {
+        // Ensure window has focus for keyboard events
+        window.focus();
+
+        window.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowRight') changeSlide(1);
             if (e.key === 'ArrowLeft') changeSlide(-1);
             if (e.key === ' ' || e.key === 'Enter') {
