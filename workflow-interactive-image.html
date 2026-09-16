@@ -142,17 +142,124 @@
             color: #0c98d4;
         }
 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #0c98d4;
+            padding-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #0c98d4;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            cursor: pointer;
+            color: #0c98d4;
+            transition: color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: #003d82;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+            color: #333333;
+            line-height: 1.7;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-close {
+            background: #e0e0e0;
+            color: #333333;
+        }
+
+        .modal-btn-close:hover {
+            background: #d0d0d0;
+        }
+
+        .modal-btn-nav {
+            background: #0c98d4;
+            color: white;
+        }
+
+        .modal-btn-nav:hover {
+            background: #0a7aa8;
+        }
+
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.6em;
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+                padding: 20px;
             }
 
-            .subtitle {
-                font-size: 1em;
-            }
-
-            .instructions {
-                font-size: 0.9em;
+            .modal-title {
+                font-size: 1.2em;
             }
         }
     </style>
@@ -208,6 +315,24 @@
                 <!-- SCALABILITY CONSIDERATIONS -->
                 <rect class="clickable-area" x="2225" y="799" width="535" height="676" data-step="scalability" data-name="Scalability Considerations" onclick="handleStepClick('scalability')"></rect>
             </svg>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="stepModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Step Title</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modalDescription">Description</p>
+                <p style="margin-top: 15px; font-weight: 600; color: #0c98d4;">⏱️ Time: <span id="modalTime">Time</span></p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-close" onclick="closeModal()">Close</button>
+                <button class="modal-btn modal-btn-nav" onclick="navigateToSlide()">Go to Slide</button>
+            </div>
         </div>
     </div>
 
@@ -306,8 +431,26 @@
             }
         };
 
+        let currentStepInfo = null;
+
         function handleStepClick(step) {
             const info = stepInfo[step];
+            if (info) {
+                currentStepInfo = info;
+                // Show modal instead of navigating directly
+                document.getElementById('modalTitle').textContent = info.title;
+                document.getElementById('modalDescription').textContent = info.description;
+                document.getElementById('modalTime').textContent = info.time;
+                document.getElementById('stepModal').style.display = 'block';
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('stepModal').style.display = 'none';
+        }
+
+        function navigateToSlide() {
+            const info = currentStepInfo;
             if (info) {
                 // Check if we're inside an iframe
                 if (window.parent !== window && window.parent.goToSlide) {
@@ -319,7 +462,16 @@
                     window.location.href = 'index.html';
                 }
             }
+            closeModal();
         }
+
+        // Close modal when clicking outside of it
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('stepModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
 
         // Make SVG responsive
         const wrapper = document.getElementById('workflowWrapper');
